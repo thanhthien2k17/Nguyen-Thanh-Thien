@@ -13,5 +13,5 @@ import java.sql.Connection;
  */
 public class ScheduleDAO {
     Connection con = null;
-    final private String 
+    final private String SQLCREATE = "";
 }
