@@ -61,7 +61,6 @@ public class CustomerDAO {
                     c.setName(rs.getString(2));
                     c.setPhone(rs.getInt(3));
                     c.setAddress(rs.getString(4));
-
                     list.add(c);
                 }
                 return list;

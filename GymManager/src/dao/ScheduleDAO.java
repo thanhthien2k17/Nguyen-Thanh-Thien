@@ -53,7 +53,7 @@ public class ScheduleDAO {
     }
 
     public List<ScheduleDTO> readAll() {
-         java.util.List<ScheduleDTO> list = new ArrayList<>();
+        java.util.List<ScheduleDTO> list = new ArrayList<>();
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQLREADALL);
@@ -64,7 +64,9 @@ public class ScheduleDAO {
                     s.setCustomerid(rs.getInt(2));
                     s.setCourseid(rs.getInt(3));
                     s.setUserid(rs.getInt(4));
-
+                    s.setTimeStart(rs.getString(5));
+                    s.setTimeEnd(rs.getString(6));
+                    s.setCareRegime(rs.getString(7));
                     list.add(s);
                 }
                 return list;
@@ -75,13 +77,37 @@ public class ScheduleDAO {
         return null;
     }
 
-    public ScheduleDTO update() {
+    public ScheduleDTO update(ScheduleDTO s) {
+        try {
+            PreparedStatement ps = con.prepareStatement(SQLUPDATE);
+            ps.setInt(1, s.getCustomerid());
+            ps.setInt(2, s.getCourseid());
+            ps.setInt(3, s.getUserid());
+            ps.setString(4, s.getTimeStart());
+            ps.setString(5, s.getTimeEnd());
+            ps.setString(6, s.getCareRegime());
+            ps.setInt(7, s.getId());
+            int i = ps.executeUpdate();
+            if (i != 0) {
+                return s;
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
     public boolean delete(int id) {
+        try {
+            PreparedStatement ps = con.prepareStatement(SQLDELETE);
+            ps.setInt(1, id);
+            int i = ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return false;
     }
-
 }
