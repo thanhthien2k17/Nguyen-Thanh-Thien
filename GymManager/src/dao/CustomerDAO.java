@@ -24,7 +24,7 @@ import db.DBConnector;
 public class CustomerDAO {
 
     Connection con = null;
-    final private String SQLCREATE = "INSERTS INTO CUSTOMER VALUES (?,?,?,?)";
+    final private String SQLCREATE = "INSERT INTO CUSTOMER VALUES (?,?,?,?)";
     final private String SQLREADALL = "SELECT * FROM CUSTOMER ";
     final String SQLUPDATE = "UPDATE CUSTOMER SET ADDRESS = ?,PHONE = ?,NAME = ? WHERE ID = ?";
     final String SQLDELETE = "DELETE FROM CUSTOMER WHERE ID = ?";

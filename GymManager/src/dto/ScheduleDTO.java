@@ -6,7 +6,6 @@
 package dto;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *
@@ -17,14 +16,14 @@ public class ScheduleDTO implements Serializable, Comparable<ScheduleDTO>{
     private int customerid;
     private int courseid;
     private int userid;
-    private Date timeStart;
-    private Date timeEnd;
+    private String timeStart;
+    private String timeEnd;
     private String careRegime;
 
     public ScheduleDTO() {
     }
 
-    public ScheduleDTO(int id, int customerid, int courseid, int userid, Date timeStart, Date timeEnd, String careRegime) {
+    public ScheduleDTO(int id, int customerid, int courseid, int userid, String timeStart, String timeEnd, String careRegime) {
         this.id = id;
         this.customerid = customerid;
         this.courseid = courseid;
@@ -66,19 +65,19 @@ public class ScheduleDTO implements Serializable, Comparable<ScheduleDTO>{
         this.userid = userid;
     }
 
-    public Date getTimeStart() {
+    public String getTimeStart() {
         return timeStart;
     }
 
-    public void setTimeStart(Date timeStart) {
+    public void setTimeStart(String timeStart) {
         this.timeStart = timeStart;
     }
 
-    public Date getTimeEnd() {
+    public String getTimeEnd() {
         return timeEnd;
     }
 
-    public void setTimeEnd(Date timeEnd) {
+    public void setTimeEnd(String timeEnd) {
         this.timeEnd = timeEnd;
     }
 
@@ -95,10 +94,10 @@ public class ScheduleDTO implements Serializable, Comparable<ScheduleDTO>{
         return "ScheduleDTO{" + "id=" + id + ", customerid=" + customerid + ", courseid=" + courseid + ", userid=" + userid + ", timeStart=" + timeStart + ", timeEnd=" + timeEnd + ", careRegime=" + careRegime + '}';
     }
     
-
     @Override
     public int compareTo(ScheduleDTO o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     
 }
