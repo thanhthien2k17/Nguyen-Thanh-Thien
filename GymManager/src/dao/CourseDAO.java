@@ -39,7 +39,7 @@ public class CourseDAO {
             ps.setInt(1, c.getId());
             ps.setString(2, c.getName());
             ps.setString(3, c.getTime());
-            ps.setInt(4, c.getPrice());
+            ps.setFloat(4, c.getPrice());
             ps.setString(5, c.getDescription());
             int i = ps.executeUpdate();
             return c;
@@ -60,7 +60,7 @@ public class CourseDAO {
                     c.setId(rs.getInt(1));
                     c.setName(rs.getString(2));
                     c.setTime(rs.getString(3));
-                    c.setPrice(rs.getInt(4));
+                    c.setPrice(rs.getFloat(4));
                     c.setDescription(rs.getString(5));
                     list.add(c);
                 }
@@ -77,7 +77,7 @@ public class CourseDAO {
             PreparedStatement ps = con.prepareStatement(SQLUPDATE);
             ps.setString(1, c.getName());
             ps.setString(2, c.getTime());
-            ps.setInt(3, c.getPrice());
+            ps.setFloat(3, c.getPrice());
             ps.setString(4, c.getDescription());
             ps.setInt(5, c.getId());
             int i = ps.executeUpdate();
