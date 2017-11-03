@@ -7,7 +7,7 @@ package view;
 
 import bus.FunctionRolesAction;
 import dao.UsersDAO;
-import utils.HashUtils;
+import ultils.HashUtils;
 import dto.Users;
 import java.net.MalformedURLException;
 import java.rmi.Naming;

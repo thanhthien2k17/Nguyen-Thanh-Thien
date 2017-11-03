@@ -6,7 +6,7 @@
 package dao;
 
 import db.DBConnector;
-import utils.HashUtils;
+import ultils.HashUtils;
 import dto.Users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

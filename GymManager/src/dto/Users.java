@@ -37,7 +37,16 @@ public class Users implements Serializable, Comparable<Users>{
         this.email = email;
         this.fullName = fullName;
     }
-
+    public Users(String username, String password, int roleId, int isActive, String address, String phone, String email, String fullName) {
+        this.username = username;
+        this.password = password;
+        this.roleId = roleId;
+        this.isActive = isActive;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.fullName = fullName;
+    }
     public int getId() {
         return id;
     }

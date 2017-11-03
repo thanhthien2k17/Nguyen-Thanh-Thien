@@ -5,17 +5,33 @@
  */
 package view;
 
+import bus.RolesAction;
+import bus.UsersAction;
+import dto.Roles;
+import dto.Users;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Aptech
  */
 public class InformationUsersFrm extends javax.swing.JFrame {
-
+    UsersAction users;
+    RolesAction roles;
+    
     /**
      * Creates new form InformationUsersFrm
      */
     public InformationUsersFrm() {
         initComponents();
+        users = new UsersAction();
+        roles = new RolesAction();
+        loadTable(users.readAll());
+        loadCombobox();
     }
 
     /**
@@ -62,6 +78,11 @@ public class InformationUsersFrm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsersMouseClicked(evt);
+            }
+        });
         spnUsers.setViewportView(tblUsers);
 
         lblUsername.setText("Username :");
@@ -85,6 +106,11 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         lblFullName.setText("FullName :");
 
         btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("Update");
 
@@ -130,8 +156,9 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
                 .addComponent(spnUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsername)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -176,6 +203,72 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
+        int row = tblUsers.getSelectedRow();
+        txtUsername.setText((String) tblUsers.getValueAt(row, 1));
+        txtPassword.setText("");
+        cmbRole.setSelectedItem(tblUsers.getValueAt(row, 2));
+        cmbIsActive.setSelectedItem(tblUsers.getValueAt(row, 3));
+        txtAddress.setText((String) tblUsers.getValueAt(row, 4));
+        txtPhone.setText((String) tblUsers.getValueAt(row, 5));
+        txtEmail.setText((String) tblUsers.getValueAt(row, 6));
+        txtFullName.setText((String) tblUsers.getValueAt(row, 7));
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblUsersMouseClicked
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        String username = txtUsername.getText().trim();
+        String password = txtPassword.getText().trim();
+        int roleid = roles.readByNameRole((String) cmbRole.getSelectedItem()).getId();
+        String isActive = (String) cmbIsActive.getSelectedItem();
+        String address = txtAddress.getText().trim();       
+        String phone = txtPhone.getText().trim();
+        String email = txtEmail.getText().trim();
+        String fullname = txtFullName.getText().trim();
+        Users u = new Users(username, password, roleid, roleid, address, phone, email, fullname);
+        if(users.create(u)==null){
+            JOptionPane.showMessageDialog(this, " Create Success ! ");
+        } else {
+            JOptionPane.showMessageDialog(this, " Failed ! Again !! ");
+        int active = 0;
+        if (isActive.equalsIgnoreCase("yes")) {
+            active = 1;
+        } else {
+            active = 0;
+        }
+
+        if (username.length() != 0 || password.length() != 0) {
+            if (users.readByName(username) == null) {
+                if (users.create(new Users(username, password, roleid, active, address, phone, email, fullname)) != null) {
+                    JOptionPane.showMessageDialog(this, "Success");
+                    txtUsername.setText("");
+                    txtPassword.setText("");
+                    loadTable(users.readAll());
+                    loadCombobox();
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Fail");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "User existed");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fill in form");
+        }
+
+    }                    
+            
+//        int active = 0;
+//        if (isActive.equalsIgnoreCase("yes")) {
+//            active = 1;
+//        } else {
+//            active = 0;
+//        }
+//        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCreateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -210,6 +303,58 @@ public class InformationUsersFrm extends javax.swing.JFrame {
             }
         });
     }
+    private void loadTable(List<Users> readAll) {
+        Vector cols = new Vector();
+        cols.add("ID");
+        cols.add("Username");
+        cols.add("Password");
+        cols.add("Role");
+        cols.add("Is Actived");
+        cols.add("Address");
+        cols.add("Phone");
+        cols.add("Email");
+        cols.add("FullName");
+        
+
+        Vector rows = new Vector();
+        for (Users u : readAll) {
+            Vector row = new Vector();
+            row.add(u.getId());
+            row.add(u.getUsername());
+            row.add(u.getPassword());
+            row.add(roles.readById(u.getRoleId()).getName());
+            if (u.getIsActive() == 1) {
+                row.add("Yes");
+            } else {
+                row.add("No");
+            }
+            row.add(u.getAddress());
+            row.add(u.getPhone());
+            row.add(u.getEmail());
+            row.add(u.getFullName());
+            rows.add(row);
+        }
+
+        tblUsers.setModel(new DefaultTableModel(rows, cols));
+        tblUsers.updateUI();
+        spnUsers.setViewportView(this.tblUsers);
+    }
+
+    private void loadCombobox() {
+        Vector roleitems = new Vector();
+        for (Roles r: roles.readAll()) {
+            roleitems.add(r.getName());
+        }
+        cmbRole.setModel(new DefaultComboBoxModel<>(roleitems));
+        cmbRole.updateUI();
+
+        Vector activeitems = new Vector();
+        activeitems.add("Yes");
+        activeitems.add("No");
+        cmbIsActive.setModel(new DefaultComboBoxModel<>(activeitems));
+        cmbIsActive.updateUI();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;
@@ -235,3 +380,5 @@ public class InformationUsersFrm extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
+  
+
