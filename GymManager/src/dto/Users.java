@@ -18,28 +18,24 @@ public class Users implements Serializable, Comparable<Users>{
     private String password;
     private int roleId;
     private int isActive;
+    private String address;
+    private String phone;
+    private String email;
+    private String fullName;
 
     public Users() {
     }
 
-    public Users(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public Users(String username, String password, int roleId, int isActive) {
-        this.username = username;
-        this.password = password;
-        this.roleId = roleId;
-        this.isActive = isActive;
-    }
-
-    public Users(int id, String username, String password, int roleId, int isActive) {
+    public Users(int id, String username, String password, int roleId, int isActive, String address, String phone, String email, String fullName) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.roleId = roleId;
         this.isActive = isActive;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.fullName = fullName;
     }
 
     public int getId() {
@@ -82,6 +78,41 @@ public class Users implements Serializable, Comparable<Users>{
         this.isActive = isActive;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+    
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -111,8 +142,10 @@ public class Users implements Serializable, Comparable<Users>{
 
     @Override
     public String toString() {
-        return "Users{" + "id=" + id + ", username=" + username + ", password=" + password + ", roleId=" + roleId + ", isActive=" + isActive + '}';
+        return "Users{" + "id=" + id + ", username=" + username + ", password=" + password + ", roleId=" + roleId + ", isActive=" + isActive + ", address=" + address + ", phone=" + phone + ", email=" + email + ", fullName=" + fullName + '}';
     }
+
+    
 
     @Override
     public int compareTo(Users o) {

@@ -25,12 +25,12 @@ import java.util.logging.Logger;
 public class UsersDAO {
 
     Connection con;
-    final String SQLCREATE = "INSERT INTO USERS VALUES(?,?,?,?)";
+    final String SQLCREATE = "INSERT INTO USERS VALUES(?,?,?,?,?,?,?,?,?)";
     final String SQLREADALL = "SELECT * FROM USERS";
     final String SQLREADBYNAME = "SELECT * FROM USERS WHERE USERNAME=?";
     final String SQLREADBYID = "SELECT * FROM USERS WHERE ID=?";
     final String SQLUPDATEPASSWORD = "UPDATE USERS SET PASSWORD=? WHERE USERNAME=?";
-    final String SQLUPDATE = "UPDATE USERS SET PASSWORD=?,ROLEID=?,ISACTIVE=? WHERE USERNAME=?";
+    final String SQLUPDATE = "UPDATE USERS SET PASSWORD=?,ROLEID=?,ISACTIVE=?,ADDRESS = ?,PHONE = ?,EMAIL = ?,FULLNAME = ? WHERE USERNAME=?";
     final String SQLDELETE = "DELETE FROM USERS WHERE USERNAME=?";
 
     public UsersDAO() {
@@ -44,6 +44,10 @@ public class UsersDAO {
             pr.setString(2, new HashUtils().md5(u.getPassword()));
             pr.setInt(3, u.getRoleId());
             pr.setInt(4, u.getIsActive());
+            pr.setString(5, u.getAddress());
+            pr.setString(6, u.getPhone());
+            pr.setString(7, u.getEmail());
+            pr.setString(8, u.getFullName());
             int i = pr.executeUpdate();
             if (i != 0) {
                 return u;
@@ -66,7 +70,13 @@ public class UsersDAO {
                     String password = rs.getString(3);
                     int role = rs.getInt(4);
                     int active = rs.getInt(5);
-                    l.add(new Users(id, username, password, role, active));
+                    String address = rs.getString(6);
+                    String phone = rs.getString(7);
+                    String email = rs.getString(8);
+                    String fullname = rs.getString(9);
+                    l.add(new Users(id, username, password, role, active, address, phone, email, fullname));
+                            
+//                    l.add(new Users(id, username, password, role, active));
                 }
             }
         } catch (SQLException ex) {
@@ -86,7 +96,11 @@ public class UsersDAO {
                     String password = rs.getString(3);
                     int role = rs.getInt(4);
                     int active = rs.getInt(5);
-                    return new Users(id, name, password, role, active);
+                    String address = rs.getString(6);
+                    String phone = rs.getString(7);
+                    String email = rs.getString(8);
+                    String fullname = rs.getString(9);
+                    return new Users(id, fullname, password, role, active, address, phone, email, fullname);
                 }
             }
 
@@ -107,7 +121,11 @@ public class UsersDAO {
                     String password = rs.getString(3);
                     int role = rs.getInt(4);
                     int active = rs.getInt(5);
-                    return new Users(id, name, password, role, active);
+                    String address = rs.getString(6);
+                    String phone = rs.getString(7);
+                    String email = rs.getString(8);
+                    String fullname = rs.getString(9);
+                    return new Users(id, fullname, password, role, active, address, phone, email, fullname);
                 }
             }
 
@@ -124,6 +142,10 @@ public class UsersDAO {
             pr.setInt(2, u.getRoleId());
             pr.setInt(3, u.getIsActive());
             pr.setString(4, u.getUsername());
+            pr.setString(5, u.getAddress());
+            pr.setString(6, u.getPhone());
+            pr.setString(7, u.getEmail());
+            pr.setString(8, u.getFullName());
             int i = pr.executeUpdate();
             if (i != 0) {
                 return u;
