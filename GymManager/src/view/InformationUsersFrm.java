@@ -113,8 +113,18 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         });
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,6 +278,66 @@ public class InformationUsersFrm extends javax.swing.JFrame {
 //        
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        String username = txtUsername.getText().trim();
+        String password = txtPassword.getText().trim();
+        int roleid = roles.readByNameRole((String) cmbRole.getSelectedItem()).getId();
+        String isActive = (String) cmbIsActive.getSelectedItem();
+        String address = txtAddress.getText().trim();       
+        String phone = txtPhone.getText().trim();
+        String email = txtEmail.getText().trim();
+        String fullname = txtFullName.getText().trim();
+        Users u = new Users(username, password, roleid, roleid, address, phone, email, fullname);
+        if(users.update(u)==null){
+            JOptionPane.showMessageDialog(this, " Update Success ! ");
+        } else {
+            JOptionPane.showMessageDialog(this, " Failed ! Again !! ");
+        int active = 0;
+        if (isActive.equalsIgnoreCase("yes")) {
+            active = 1;
+        } else {
+            active = 0;
+        }
+
+        if (username.length() != 0 || password.length() != 0) {
+            if (users.readByName(username) == null) {
+                if (users.create(new Users(username, password, roleid, active, address, phone, email, fullname)) != null) {
+                    JOptionPane.showMessageDialog(this, "Success");
+                    txtUsername.setText("");
+                    txtPassword.setText("");
+                    loadTable(users.readAll());
+                    loadCombobox();
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Fail");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "User existed");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fill in form");
+        }
+
+        }                
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int row = tblUsers.getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(this," Choose Row ");
+        }else{
+            String username =(String) tblUsers.getValueAt(row, 0);
+            if(users.delete(username)){
+                JOptionPane.showMessageDialog(this," Delete Success ! ");
+                loadTable(users.readAll());
+            }else{
+                 JOptionPane.showMessageDialog(this," Delete failed ! ");
+            }
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
