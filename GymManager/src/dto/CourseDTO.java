@@ -15,13 +15,12 @@ public class CourseDTO implements Serializable,Comparable<CourseDTO>{
     private int id;
     private String name;
     private String time;
-    private int price;
+    private float price;
     private String description;
-
     public CourseDTO() {
     }
 
-    public CourseDTO(int id, String name, String time, int price, String description) {
+    public CourseDTO(int id, String name, String time, float price, String description) {
         this.id = id;
         this.name = name;
         this.time = time;
@@ -53,11 +52,11 @@ public class CourseDTO implements Serializable,Comparable<CourseDTO>{
         this.time = time;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
