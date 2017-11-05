@@ -131,9 +131,10 @@ public class LoginFrm extends javax.swing.JFrame {
                         }
                     }
                     if (flag) {
-                        MainFrm mf = new MainFrm(user);
-                        mf.setVisible(true);
-                        this.dispose();
+//                        MainFrm mf = new MainFrm(user);
+//                        mf.setVisible(true);
+//                        this.dispose();
+                        JOptionPane.showMessageDialog(this, "Access");
                     } else {
                         JOptionPane.showMessageDialog(this, "You don't have login right");
                     }
