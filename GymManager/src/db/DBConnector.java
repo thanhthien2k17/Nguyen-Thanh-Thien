@@ -49,7 +49,7 @@ public class DBConnector {
         }
 
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             con = DriverManager.getConnection(database, password, userName);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
