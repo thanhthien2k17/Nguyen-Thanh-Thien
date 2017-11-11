@@ -6,6 +6,7 @@
 package dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -14,21 +15,22 @@ import java.io.Serializable;
 public class CourseDTO implements Serializable,Comparable<CourseDTO>{
     private int id;
     private String name;
-    private String time;
+    private Date time;
     private float price;
     private String description;
     public CourseDTO() {
     }
 
-    public CourseDTO(int id, String name, String time, float price, String description) {
-        this.id = id;
+    public CourseDTO(String name, Date time, float price, String description) {
         this.name = name;
         this.time = time;
         this.price = price;
         this.description = description;
     }
+
     
-    public CourseDTO(String name, String time, float price, String description) {
+    public CourseDTO(int id, String name, Date time, float price, String description) {
+        this.id = id;
         this.name = name;
         this.time = time;
         this.price = price;
@@ -51,11 +53,11 @@ public class CourseDTO implements Serializable,Comparable<CourseDTO>{
         this.name = name;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
@@ -80,9 +82,13 @@ public class CourseDTO implements Serializable,Comparable<CourseDTO>{
         return "CourseDTO{" + "id=" + id + ", name=" + name + ", time=" + time + ", price=" + price + ", description=" + description + '}';
     }
     
+
     @Override
     public int compareTo(CourseDTO o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
+
     
 }

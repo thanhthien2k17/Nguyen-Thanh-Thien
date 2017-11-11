@@ -12,7 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,10 +27,13 @@ import java.util.logging.Logger;
 public class CourseDAO {
 
     Connection con = null;
-    final private String SQLCREATE = "INSERT INTO COURSE VALUE (?,?,?,?)";
+    final private String SQLCREATE = "INSERT INTO COURSE VALUES (?,?,?,?)";
     final private String SQLREADALL = " SELECT * FROM COURSE ";
-    final private String SQLUPDATE = "UPDATE COURSE SET NAME = ? , TIME = ?,PRICE = ?, DESCRIPTION =?";
+    final private String SQLREADBYID = "SELECT * FROM COURSE WHERE ID=?";
+    final private String SQLUPDATE = "UPDATE COURSE SET NAME = ? , TIME = ?,PRICE = ?, DESCRIPTION =? WHERE ID = ?";
     final private String SQLDELETE = "DELETE FROM COURSE WHERE ID = ?";
+    SimpleDateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat mdy = new SimpleDateFormat("MM/dd/yyyy");
 
     public CourseDAO() {
         con = new DBConnector().getCon();
@@ -36,19 +42,22 @@ public class CourseDAO {
     public CourseDTO create(CourseDTO c) {
         try {
             PreparedStatement ps = con.prepareStatement(SQLCREATE);
-            ps.setString(2, c.getName());
-            ps.setString(3, c.getTime());
-            ps.setFloat(4, c.getPrice());
-            ps.setString(5, c.getDescription());
+            ps.setString(1, c.getName());
+            ps.setDate(2, new java.sql.Date(mdy.parse(mdy.format(c.getTime())).getDate()));
+//            ps.setDate(3, new java.sql.Date(c.getDate().getTime());
+            ps.setFloat(3, c.getPrice());
+            ps.setString(4, c.getDescription());
             int i = ps.executeUpdate();
             return c;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    public List<CourseDTO> readAll() {
+    public List<CourseDTO> readAll(){
         List<CourseDTO> list = new ArrayList<>();
         try {
             Statement st = con.createStatement();
@@ -56,40 +65,44 @@ public class CourseDAO {
             if (rs != null) {
                 while (rs.next()) {
                     CourseDTO c = new CourseDTO();
-                    c.setId(rs.getInt(1));
-                    c.setName(rs.getString(2));
-                    c.setTime(rs.getString(3));
-                    c.setPrice(rs.getFloat(4));
-                    c.setDescription(rs.getString(5));
-                    list.add(c);
+                    int id = rs.getInt(1);
+                    String name = rs.getString(2);
+                    Date time = dmy.parse(dmy.format(rs.getDate(3)));
+                    float price = rs.getFloat(4);
+                    String description = rs.getString(5);
+                    list.add(new CourseDTO(id, name, time, price, description));
                 }
-                return list;
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return list;
     }
 
     public CourseDTO update(CourseDTO c) {
         try {
             PreparedStatement ps = con.prepareStatement(SQLUPDATE);
             ps.setString(1, c.getName());
-            ps.setString(2, c.getTime());
+            ps.setDate(2, new java.sql.Date(mdy.parse(mdy.format(c.getTime())).getDate()));;
             ps.setFloat(3, c.getPrice());
             ps.setString(4, c.getDescription());
             ps.setInt(5, c.getId());
             int i = ps.executeUpdate();
-            if (i != 0) {
+
                 return c;
-            }
+
 
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    public boolean delete(int id){
+
+    public boolean delete(int id) {
         try {
             PreparedStatement ps = con.prepareStatement(SQLDELETE);
             ps.setInt(1, id);
@@ -99,5 +112,27 @@ public class CourseDAO {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    public CourseDTO readById(int id){
+        try {
+            PreparedStatement pr = con.prepareStatement(SQLREADBYID);
+            pr.setInt(1, id);
+            ResultSet rs = pr.executeQuery();
+            if(rs != null){
+                if(rs.next()){
+                    String name = rs.getString(2);
+                    Date time = dmy.parse(dmy.format(rs.getDate(3)));
+                    double price = rs.getDouble(4);
+                    String description = rs.getString(5);
+                    return (new CourseDTO(id, name, time, (float) price, description));
+                    
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
