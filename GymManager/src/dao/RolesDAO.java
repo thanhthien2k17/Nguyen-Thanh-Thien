@@ -79,7 +79,7 @@ public class RolesDAO {
             if (rs != null) {
                 if (rs.next()) {
                     String name = rs.getString(2);
-                    String des = HashUtils.decryptBlowfish(rs.getString(3), "create");
+                    String des = rs.getString(3);
                     return new Roles(id, name, des);
                 }
             }
