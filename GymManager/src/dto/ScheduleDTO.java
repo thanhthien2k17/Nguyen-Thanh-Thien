@@ -33,6 +33,15 @@ public class ScheduleDTO implements Serializable, Comparable<ScheduleDTO>{
         this.careRegime = careRegime;
     }
 
+    public ScheduleDTO(int customerid, int courseid, int userid, String timeStart, String timeEnd, String careRegime) {
+        this.customerid = customerid;
+        this.courseid = courseid;
+        this.userid = userid;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
+        this.careRegime = careRegime;
+    }
+    
     public int getId() {
         return id;
     }

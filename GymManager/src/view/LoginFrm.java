@@ -6,16 +6,13 @@
 package view;
 
 import bus.FunctionRolesAction;
+import bus.RolesAction;
 import dao.UsersDAO;
+import dto.Roles;
 import ultils.HashUtils;
 import dto.Users;
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,13 +25,13 @@ public class LoginFrm extends javax.swing.JFrame {
      * Creates new form LoginFrm
      */
     UsersDAO users;
-    FunctionRolesAction fr;
+    RolesAction fr;
 
     public LoginFrm() {
         initComponents();
         setLocationRelativeTo(null);
         users = new UsersDAO();
-        fr = new FunctionRolesAction();
+        fr = new RolesAction();
     }
 
     /**
@@ -121,20 +118,13 @@ public class LoginFrm extends javax.swing.JFrame {
         String pass = txtPassword.getText();
         user = users.readByName(username);
         if (user != null) {
-            if (user.getPassword().equals(new HashUtils().md5(pass))) {
+            if (user.getPassword().equals(new HashUtils().hashmd5(pass))) {
                 if (user.getIsActive() == 1) {
-                    List<Integer> listfunction = fr.readByRole(user.getId()).getFunctionId();
-                    boolean flag = false;
-                    for (Integer i : listfunction) {
-                        if (i == 1) {
-                            flag = true;
-                        }
-                    }
-                    if (flag) {
+                    if (user.getRoleId()==1) {
 //                        MainFrm mf = new MainFrm(user);
 //                        mf.setVisible(true);
 //                        this.dispose();
-                        JOptionPane.showMessageDialog(this, "Access");
+//                        JOptionPane.showMessageDialog(this, "Access");
                     } else {
                         JOptionPane.showMessageDialog(this, "You don't have login right");
                     }

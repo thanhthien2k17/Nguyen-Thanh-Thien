@@ -16,18 +16,18 @@ import java.util.Objects;
 public class FunctionRoles implements Serializable, Comparable<FunctionRoles>{
     private int id;
     private int roleId;
-    private List<Integer> functionId;
+    private int functionId;
     
     public FunctionRoles() {
     }
 
-    public FunctionRoles(int id, int roleId, List<Integer> functionId) {
+    public FunctionRoles(int id, int roleId, int functionId) {
         this.id = id;
         this.roleId = roleId;
         this.functionId = functionId;
     }
-
-    public FunctionRoles(int roleId, List<Integer> functionId) {
+    
+    public FunctionRoles(int roleId, int functionId) {
         this.roleId = roleId;
         this.functionId = functionId;
     }
@@ -48,40 +48,15 @@ public class FunctionRoles implements Serializable, Comparable<FunctionRoles>{
         this.roleId = roleId;
     }
 
-    public List<Integer> getFunctionId() {
+    public int getFunctionId() {
         return functionId;
     }
 
-    public void setFunctionId(List<Integer> functionId) {
+    public void setFunctionId(int functionId) {
         this.functionId = functionId;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final FunctionRoles other = (FunctionRoles) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (this.roleId != other.roleId) {
-            return false;
-        }
-        return true;
-    }
+   
 
     @Override
     public String toString() {

@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class ScheduleDAO {
 
     Connection con = null;
-    final private String SQLCREATE = "INSERT INTO SCHEDULE VALUE(?,?,?,?,?,?,?) ";
+    final private String SQLCREATE = "INSERT INTO SCHEDULE VALUE(?,?,?,?,?,?) ";
     final private String SQLREADALL = "SELECT * FROM SCHEDULE ";
     final private String SQLUPDATE = "UPDATE SCHEDULE SET CUSTOMERID = ?, COURSEID = ?, USERID = ? , TIMESTART = ? , TIMEEND = ?,CAREREGIME = ? WHERE ID = ?";
     final private String SQLDELETE = "DELETE FROM SCHEDULE WHERE ID = ?";
@@ -36,13 +36,12 @@ public class ScheduleDAO {
     public ScheduleDTO create(ScheduleDTO s) {
         try {
             PreparedStatement ps = con.prepareStatement(SQLCREATE);
-            ps.setInt(1, s.getId());
-            ps.setInt(2, s.getCustomerid());
-            ps.setInt(3, s.getCourseid());
-            ps.setInt(4, s.getUserid());
-            ps.setString(5, s.getTimeStart());
-            ps.setString(6, s.getTimeEnd());
-            ps.setString(7, s.getCareRegime());
+            ps.setInt(1, s.getCustomerid());
+            ps.setInt(2, s.getCourseid());
+            ps.setInt(3, s.getUserid());
+            ps.setString(4, s.getTimeStart());
+            ps.setString(5, s.getTimeEnd());
+            ps.setString(6, s.getCareRegime());
 
             int i = ps.executeUpdate();
             return s;

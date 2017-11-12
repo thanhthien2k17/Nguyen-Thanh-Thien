@@ -41,7 +41,7 @@ public class RolesDAO {
         try {
             PreparedStatement pr = con.prepareStatement(SQLCREATE);
             pr.setString(1, r.getName());
-            pr.setString(2, new HashUtils().encryptBlowfish(r.getDescription(), "create"));
+            pr.setString(2, HashUtils.encryptBlowfish(r.getDescription(), "create"));
             int i = pr.executeUpdate();
             if (i != 0) {
                 return r;
@@ -61,7 +61,7 @@ public class RolesDAO {
                 while (rs.next()) {
                     int id = rs.getInt(1);
                     String name = rs.getString(2);
-                    String des = new HashUtils().decryptBlowfish(rs.getString(3), "create");
+                    String des = rs.getString(3);
                     l.add(new Roles(id, name, des));
                 }
             }
@@ -79,7 +79,7 @@ public class RolesDAO {
             if (rs != null) {
                 if (rs.next()) {
                     String name = rs.getString(2);
-                    String des = new HashUtils().decryptBlowfish(rs.getString(3), "create");
+                    String des = HashUtils.decryptBlowfish(rs.getString(3), "create");
                     return new Roles(id, name, des);
                 }
             }
@@ -100,7 +100,7 @@ public class RolesDAO {
                 while (rs.next()) {
                     int id = rs.getInt(1);
                     String nam = rs.getString(2);
-                    String des = new HashUtils().decryptBlowfish(rs.getString(3), "create");
+                    String des = HashUtils.decryptBlowfish(rs.getString(3), "create");
                     l.add(new Roles(id, nam, des));
                 }
             }
@@ -118,7 +118,7 @@ public class RolesDAO {
             if (rs != null) {
                 while (rs.next()) {
                     int id = rs.getInt(1);
-                    String des = new HashUtils().decryptBlowfish(rs.getString(3), "create");
+                    String des =rs.getString(3);
                    return  new Roles(id, name, des);
                 }
             }

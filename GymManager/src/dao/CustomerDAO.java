@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package dao;
-
+import java.util.List;
 import dto.CustomerDTO;
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +23,7 @@ import db.DBConnector;
 public class CustomerDAO {
 
     Connection con = null;
-    final private String SQLCREATE = "INSERT INTO CUSTOMER VALUES (?,?,?,?)";
+    final private String SQLCREATE = "INSERT INTO CUSTOMER VALUES (?,?,?)";
     final private String SQLREADALL = "SELECT * FROM CUSTOMER ";
     final String SQLUPDATE = "UPDATE CUSTOMER SET ADDRESS = ?,PHONE = ?,NAME = ? WHERE ID = ?";
     final String SQLDELETE = "DELETE FROM CUSTOMER WHERE ID = ?";
@@ -36,10 +35,9 @@ public class CustomerDAO {
     public CustomerDTO create(CustomerDTO c) {
         try {
             PreparedStatement ps = con.prepareStatement(SQLCREATE);
-            ps.setInt(1, c.getId());
-            ps.setString(2, c.getName());
-            ps.setInt(3, c.getPhone());
-            ps.setString(4, c.getAddress());
+            ps.setString(1, c.getName());
+            ps.setInt(2, c.getPhone());
+            ps.setString(3, c.getAddress());
             int i = ps.executeUpdate();
             return c;
         } catch (SQLException ex) {
@@ -49,7 +47,7 @@ public class CustomerDAO {
         return null;
     }
 
-    public java.util.List<CustomerDTO> readAll() {
+    public List<CustomerDTO> readAll() {
         java.util.List<CustomerDTO> list = new ArrayList<>();
         try {
             Statement st = con.createStatement();

@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class InvoiceidDAO {
     Connection con = null;
-    final private String SQLCREATE = "INSERT INTO INVOICEID VALUES (?,?,?,?)";
+    final private String SQLCREATE = "INSERT INTO INVOICEID VALUES (?,?,?)";
     final private String SQLREADALL= "SELECT * FROM INVOICEID ";
     final private String SQLUPDATE = "UPDATE INVOICEID SET USERID = ?, DATE = ?, TOTAL = ? WHERE ID = ?";
     final private String SQLDELETE = "DELETE FROM INVOICEID WHERE ID = ? ";
@@ -34,10 +34,9 @@ public class InvoiceidDAO {
     public InvoiceidDTO create(InvoiceidDTO in){
         try {
             PreparedStatement ps = con.prepareStatement(SQLCREATE);
-            ps.setInt(1, in.getId());
-            ps.setInt(2, in.getUserid());
-            ps.setString(3, in.getDatetime());
-            ps.setInt(4, in.getTotal());
+            ps.setInt(1, in.getUserid());
+            ps.setString(2, in.getDatetime());
+            ps.setInt(3, in.getTotal());
             int i = ps.executeUpdate();
             return in;
         } catch (SQLException ex) {

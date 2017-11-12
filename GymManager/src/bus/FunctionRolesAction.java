@@ -29,16 +29,12 @@ public class FunctionRolesAction {
         return dao.readAll();
     }
 
-    public FunctionRoles readByRole(int id) {
-        return dao.readByRole(id);
+    public FunctionRoles readById(int id) {
+        return dao.readById(id);
     }
 
-    public List<FunctionRoles> readByFunction(int id) {
-        return dao.readByFunction(id);
-    }
-
-    public boolean delete(int role, int function) {
-        return dao.delete(role, function);
+    public boolean delete(int id) {
+        return dao.delete(id);
     }
 
 }

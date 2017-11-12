@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class CourseDAO {
 
     Connection con = null;
-    final private String SQLCREATE = "INSERT INTO COURSE VALUE (?,?,?,?,?)";
+    final private String SQLCREATE = "INSERT INTO COURSE VALUE (?,?,?,?)";
     final private String SQLREADALL = " SELECT * FROM COURSE ";
     final private String SQLUPDATE = "UPDATE COURSE SET NAME = ? , TIME = ?,PRICE = ?, DESCRIPTION =?";
     final private String SQLDELETE = "DELETE FROM COURSE WHERE ID = ?";
@@ -36,7 +36,6 @@ public class CourseDAO {
     public CourseDTO create(CourseDTO c) {
         try {
             PreparedStatement ps = con.prepareStatement(SQLCREATE);
-            ps.setInt(1, c.getId());
             ps.setString(2, c.getName());
             ps.setString(3, c.getTime());
             ps.setFloat(4, c.getPrice());

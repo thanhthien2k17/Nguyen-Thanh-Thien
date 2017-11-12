@@ -26,6 +26,12 @@ public class CustomerDTO implements Serializable, Comparable<CustomerDTO>{
         this.phone = phone;
         this.address = address;
     }
+    
+    public CustomerDTO(String name, int phone, String address) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+    }
 
     public int getId() {
         return id;

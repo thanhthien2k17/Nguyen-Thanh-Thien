@@ -27,6 +27,12 @@ public class InvoiceidDTO implements Serializable, Comparable<InvoiceidDTO>{
         this.total = total;
     }
 
+    public InvoiceidDTO(int userid, String datetime, int total) {
+        this.userid = userid;
+        this.datetime = datetime;
+        this.total = total;
+    }
+    
     public int getId() {
         return id;
     }

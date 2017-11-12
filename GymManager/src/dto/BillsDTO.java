@@ -26,6 +26,12 @@ public class BillsDTO implements Serializable, Comparable<BillsDTO>{
         this.courseid = courseid;
         this.price = price;
     }
+    
+    public BillsDTO(int invoiceid, int courseid, float price) {
+        this.invoiceid = invoiceid;
+        this.courseid = courseid;
+        this.price = price;
+    }
 
     public int getId() {
         return id;

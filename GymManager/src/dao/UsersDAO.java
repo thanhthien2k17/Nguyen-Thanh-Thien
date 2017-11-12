@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class UsersDAO {
 
     Connection con;
-    final String SQLCREATE = "INSERT INTO USERS VALUES(?,?,?,?,?,?,?,?,?)";
+    final String SQLCREATE = "INSERT INTO USERS VALUES(?,?,?,?,?,?,?,?)";
     final String SQLREADALL = "SELECT * FROM USERS";
     final String SQLREADBYNAME = "SELECT * FROM USERS WHERE USERNAME=?";
     final String SQLREADBYID = "SELECT * FROM USERS WHERE ID=?";
@@ -41,7 +41,7 @@ public class UsersDAO {
         try {
             PreparedStatement pr = con.prepareStatement(SQLCREATE);
             pr.setString(1, u.getUsername());
-            pr.setString(2, new HashUtils().md5(u.getPassword()));
+            pr.setString(2, new HashUtils().hashmd5(u.getPassword()));
             pr.setInt(3, u.getRoleId());
             pr.setInt(4, u.getIsActive());
             pr.setString(5, u.getAddress());
@@ -138,7 +138,7 @@ public class UsersDAO {
     public Users update(Users u) {
         try {
             PreparedStatement pr = con.prepareStatement(SQLUPDATE);
-            pr.setString(1, new HashUtils().md5(u.getPassword()));
+            pr.setString(1, new HashUtils().hashmd5(u.getPassword()));
             pr.setInt(2, u.getRoleId());
             pr.setInt(3, u.getIsActive());
             pr.setString(4, u.getUsername());
@@ -159,7 +159,7 @@ public class UsersDAO {
     public Users updatePassword(Users u) {
         try {
             PreparedStatement pr = con.prepareStatement(SQLUPDATEPASSWORD);
-            pr.setString(1, new HashUtils().md5(u.getPassword()));
+            pr.setString(1, new HashUtils().hashmd5(u.getPassword()));
             pr.setString(2, u.getUsername());
             int i = pr.executeUpdate();
             if (i != 0) {

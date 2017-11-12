@@ -27,6 +27,13 @@ public class CourseDTO implements Serializable,Comparable<CourseDTO>{
         this.price = price;
         this.description = description;
     }
+    
+    public CourseDTO(String name, String time, float price, String description) {
+        this.name = name;
+        this.time = time;
+        this.price = price;
+        this.description = description;
+    }
 
     public int getId() {
         return id;

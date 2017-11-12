@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class BillsDAO {
     Connection con = null;
-    final private String SQLCREATE = "INSERT INTO BILLS VALUE(?,?,?,?)";
+    final private String SQLCREATE = "INSERT INTO BILLS VALUE(?,?,?)";
     final private String SQLREADALL= "SELECT * FROM BILLS ";
     final private String SQLUPDATE = "UPDATE BILLS SET INVOICEID = ? , COURSEID = ?, PRICE = ? WHERE ID = ? ";
     final private String SQLDELETE = "DELETE FROM BILLS WHERE ID = ?";
@@ -34,10 +34,9 @@ public class BillsDAO {
     public BillsDTO create (BillsDTO b){
          try {
             PreparedStatement ps = con.prepareStatement(SQLCREATE);
-            ps.setInt(1, b.getId());
-            ps.setInt(2, b.getInvoiceid());
-            ps.setInt(3, b.getCourseid());
-            ps.setFloat(4, b.getPrice());
+            ps.setInt(1, b.getInvoiceid());
+            ps.setInt(2, b.getCourseid());
+            ps.setFloat(3, b.getPrice());
             int i = ps.executeUpdate();
             return b;
         } catch (SQLException ex) {
