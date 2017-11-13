@@ -308,13 +308,14 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         String phone = txtPhone.getText().trim();
         String email = txtEmail.getText().trim();
         String fullname = txtFullName.getText().trim();
-        Users u = new Users(id,username, password, roleid, active, address, phone, email, fullname);
-        
         if (isActive.equalsIgnoreCase("yes")) {
             active = 1;
         } else {
             active = 0;
         }
+        Users u = new Users(id,username, password, roleid, active, address, phone, email, fullname);
+        
+        
         if(users.update(u)!=null){
             loadTable(users.readAll());
             JOptionPane.showMessageDialog(this, " Update Success ! ");
