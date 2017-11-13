@@ -30,7 +30,7 @@ public class CourseDAO {
     final private String SQLCREATE = "INSERT INTO COURSE VALUES (?,?,?,?)";
     final private String SQLREADALL = " SELECT * FROM COURSE ";
     final private String SQLREADBYID = "SELECT * FROM COURSE WHERE ID=?";
-    final private String SQLUPDATE = "UPDATE COURSE SET NAME = ? , TIME = ?,PRICE = ?, DESCRIPTION =? WHERE ID = ?";
+    final private String SQLUPDATE = "UPDATE COURSE SET NAME = ?,TIME = ?,PRICE = ?, DESCRIPTION =? WHERE ID=? ";
     final private String SQLDELETE = "DELETE FROM COURSE WHERE ID = ?";
     SimpleDateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat mdy = new SimpleDateFormat("MM/dd/yyyy");
@@ -48,7 +48,9 @@ public class CourseDAO {
             ps.setFloat(3, c.getPrice());
             ps.setString(4, c.getDescription());
             int i = ps.executeUpdate();
-            return c;
+            if (i != 0) {
+                return c;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -82,24 +84,23 @@ public class CourseDAO {
     }
 
     public CourseDTO update(CourseDTO c) {
+
         try {
             PreparedStatement ps = con.prepareStatement(SQLUPDATE);
             ps.setString(1, c.getName());
-            ps.setDate(2, new java.sql.Date(mdy.parse(mdy.format(c.getTime())).getDate()));;
+            ps.setDate(2, new java.sql.Date(mdy.parse(mdy.format(c.getTime())).getDate()));
             ps.setFloat(3, c.getPrice());
             ps.setString(4, c.getDescription());
             ps.setInt(5, c.getId());
             int i = ps.executeUpdate();
-
+            if (i != 0) {
                 return c;
-
-
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
+            }
+        } catch (SQLException | ParseException ex) {
             Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+
     }
 
     public boolean delete(int id) {

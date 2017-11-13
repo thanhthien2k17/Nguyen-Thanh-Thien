@@ -86,6 +86,8 @@ public class CourseFrm extends javax.swing.JFrame {
         btnCreate = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        lblId = new javax.swing.JLabel();
+        lblId2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,6 +138,8 @@ public class CourseFrm extends javax.swing.JFrame {
             }
         });
 
+        lblId.setText("Id:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,12 +156,14 @@ public class CourseFrm extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblName)
                                     .addComponent(lblTime)
-                                    .addComponent(lblPrice))
+                                    .addComponent(lblPrice)
+                                    .addComponent(lblId))
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dcdTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblId2)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblDescription)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -176,7 +182,11 @@ public class CourseFrm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(spnCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblId)
+                    .addComponent(lblId2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -224,6 +234,7 @@ public class CourseFrm extends javax.swing.JFrame {
         int row = tblCourse.getSelectedRow();
         int id = Integer.parseInt(String.valueOf(tblCourse.getValueAt(row, 0)));
 //        txtID.setText(String.valueOf(id));
+        lblId2.setText(String.valueOf(tblCourse.getValueAt(row, 0)));
         txtName.setText((String) tblCourse.getValueAt(row, 1));
         Date date = (Date) tblCourse.getValueAt(row, 2);
         Calendar calendar = Calendar.getInstance();
@@ -261,7 +272,8 @@ public class CourseFrm extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-           try {
+        try {
+            int id= Integer.parseInt(lblId2.getText().trim());
             String name = txtName.getText().trim();
             SimpleDateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
             Date time = dmy.parse(dcdTime.getText().trim());
@@ -322,6 +334,8 @@ public class CourseFrm extends javax.swing.JFrame {
     private javax.swing.JButton btnUpdate;
     private datechooser.beans.DateChooserCombo dcdTime;
     private javax.swing.JLabel lblDescription;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblId2;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPrice;
     private javax.swing.JLabel lblTime;

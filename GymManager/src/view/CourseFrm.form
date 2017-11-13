@@ -37,12 +37,14 @@
                                   <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblTime" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblPrice" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblId" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="dcdTime" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtName" min="-2" pref="141" max="-2" attributes="0"/>
                                   <Component id="txtPrice" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                                  <Component id="lblId2" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -72,7 +74,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="spnCourse" min="-2" pref="101" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblId2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -212,6 +219,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblId">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Id:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblId2">
     </Component>
   </SubComponents>
 </Form>
