@@ -30,7 +30,7 @@ public class UsersDAO {
     final String SQLREADBYNAME = "SELECT * FROM USERS WHERE USERNAME=?";
     final String SQLREADBYID = "SELECT * FROM USERS WHERE ID=?";
     final String SQLUPDATEPASSWORD = "UPDATE USERS SET PASSWORD=? WHERE USERNAME=?";
-    final String SQLUPDATE = "UPDATE USERS SET PASSWORD=?,ROLEID=?,ISACTIVE=?,ADDRESS = ?,PHONE = ?,EMAIL = ?,FULLNAME = ? WHERE USERNAME=?";
+    final String SQLUPDATE = "UPDATE USERS SET USERNAME=?,PASSWORD=?,ROLEID=?,ISACTIVE=?,ADDRESS = ?,PHONE = ?,EMAIL = ?,FULLNAME = ? WHERE ID=?";
     final String SQLDELETE = "DELETE FROM USERS WHERE USERNAME=?";
 
     public UsersDAO() {
@@ -138,14 +138,15 @@ public class UsersDAO {
     public Users update(Users u) {
         try {
             PreparedStatement pr = con.prepareStatement(SQLUPDATE);
-            pr.setString(1, new HashUtils().hashmd5(u.getPassword()));
-            pr.setInt(2, u.getRoleId());
-            pr.setInt(3, u.getIsActive());
-            pr.setString(4, u.getUsername());
+            pr.setString(1, u.getUsername());
+            pr.setString(2, new HashUtils().hashmd5(u.getPassword()));
+            pr.setInt(3, u.getRoleId());
+            pr.setInt(4, u.getIsActive());
             pr.setString(5, u.getAddress());
             pr.setString(6, u.getPhone());
             pr.setString(7, u.getEmail());
             pr.setString(8, u.getFullName());
+            pr.setInt(9, u.getId());
             int i = pr.executeUpdate();
             if (i != 0) {
                 return u;
@@ -173,15 +174,14 @@ public class UsersDAO {
 
     public boolean delete(String name) {
         try {
-            PreparedStatement pr = con.prepareStatement(SQLDELETE);
-            pr.setString(1, name);
-            int i = pr.executeUpdate();
-            if (i != 0) {
-                return true;
-            }
+            PreparedStatement ps = con.prepareStatement(SQLDELETE);
+            ps.setString(1, name);
+            int i = ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
-            Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return false;
     }
 }

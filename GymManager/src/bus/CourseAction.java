@@ -8,8 +8,6 @@ package bus;
 import dao.CourseDAO;
 import dto.CourseDTO;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -17,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class CourseAction {
 
-    CourseDAO dao;
+    CourseDAO dao=null;
 
     public CourseAction() {
         dao = new CourseDAO();

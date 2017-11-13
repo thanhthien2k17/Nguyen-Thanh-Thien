@@ -24,8 +24,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CourseFrm extends javax.swing.JFrame {
 
-    CourseAction ac;
-    List<CourseDTO> list;
+    CourseAction ac=null;
+    
     int id;
 
     /**
@@ -35,10 +35,12 @@ public class CourseFrm extends javax.swing.JFrame {
 
         initComponents();
         ac = new CourseAction();
+        setSize(800,800);
+        setLocationRelativeTo(null);
         loadTable(ac.readAll());
     }
 
-    private void loadTable(List<CourseDTO> readAll) {
+    void loadTable(List<CourseDTO> readAll) {
         Vector cols = new Vector();
         cols.add("ID");
         cols.add("Name");
@@ -208,7 +210,7 @@ public class CourseFrm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this," Choose Row ");
         }else{
             int id = (int) tblCourse.getValueAt(row, 0);
-            if(ac.delete(id)){
+            if(ac.delete(id)!=false){
                 JOptionPane.showMessageDialog(this," Delete Success ! ");
                 loadTable(ac.readAll());
             }else{
@@ -220,7 +222,7 @@ public class CourseFrm extends javax.swing.JFrame {
     private void tblCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCourseMouseClicked
         // TODO add your handling code here:
         int row = tblCourse.getSelectedRow();
-//        int id = (int) tblCourse.getValueAt(tblCourse.getSelectedRow(), 0);
+        int id = Integer.parseInt(String.valueOf(tblCourse.getValueAt(row, 0)));
 //        txtID.setText(String.valueOf(id));
         txtName.setText((String) tblCourse.getValueAt(row, 1));
         Date date = (Date) tblCourse.getValueAt(row, 2);
@@ -265,7 +267,8 @@ public class CourseFrm extends javax.swing.JFrame {
             Date time = dmy.parse(dcdTime.getText().trim());
             float price = Float.parseFloat(txtPrice.getText().trim());
             String description = txtDescription.getText().trim();
-            CourseDTO c = new CourseDTO(name, time, price, description);
+            CourseDTO c = new CourseDTO(id,name, time, price, description);
+
             if (ac.update(c) != null) {
                 JOptionPane.showMessageDialog(this, " Update Success ! ");
                 loadTable(ac.readAll());

@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class InformationUsersFrm extends javax.swing.JFrame {
     UsersAction users;
     RolesAction roles;
+    int id;
     
     /**
      * Creates new form InformationUsersFrm
@@ -101,6 +102,11 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         });
 
         cmbIsActive.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbIsActive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbIsActiveActionPerformed(evt);
+            }
+        });
 
         lblAddress.setText("Address :");
 
@@ -109,6 +115,12 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         lblEmail.setText("Email :");
 
         lblFullName.setText("FullName :");
+
+        txtAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAddressActionPerformed(evt);
+            }
+        });
 
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -220,14 +232,15 @@ public class InformationUsersFrm extends javax.swing.JFrame {
 
     private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
         int row = tblUsers.getSelectedRow();
+        id = Integer.parseInt(String.valueOf(tblUsers.getValueAt(row, 0)));
         txtUsername.setText((String) tblUsers.getValueAt(row, 1));
         txtPassword.setText("");
-        cmbRole.setSelectedItem(tblUsers.getValueAt(row, 2));
-        cmbIsActive.setSelectedItem(tblUsers.getValueAt(row, 3));
-        txtAddress.setText((String) tblUsers.getValueAt(row, 4));
-        txtPhone.setText((String) tblUsers.getValueAt(row, 5));
-        txtEmail.setText((String) tblUsers.getValueAt(row, 6));
-        txtFullName.setText((String) tblUsers.getValueAt(row, 7));
+        cmbRole.setSelectedItem(tblUsers.getValueAt(row, 3));
+        cmbIsActive.setSelectedItem(tblUsers.getValueAt(row, 4));
+        txtAddress.setText((String) tblUsers.getValueAt(row, 5));
+        txtPhone.setText((String) tblUsers.getValueAt(row, 6));
+        txtEmail.setText((String) tblUsers.getValueAt(row, 7));
+        txtFullName.setText((String) tblUsers.getValueAt(row, 8));
         
         // TODO add your handling code here:
     }//GEN-LAST:event_tblUsersMouseClicked
@@ -286,6 +299,7 @@ public class InformationUsersFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        int active = 0;
         String username = txtUsername.getText().trim();
         String password = txtPassword.getText().trim();
         int roleid = roles.readByNameRole((String) cmbRole.getSelectedItem()).getId();
@@ -294,17 +308,19 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         String phone = txtPhone.getText().trim();
         String email = txtEmail.getText().trim();
         String fullname = txtFullName.getText().trim();
-        Users u = new Users(username, password, roleid, roleid, address, phone, email, fullname);
-        if(users.update(u)==null){
-            JOptionPane.showMessageDialog(this, " Update Success ! ");
-        } else {
-            JOptionPane.showMessageDialog(this, " Failed ! Again !! ");
-        int active = 0;
+        Users u = new Users(id,username, password, roleid, active, address, phone, email, fullname);
+        
         if (isActive.equalsIgnoreCase("yes")) {
             active = 1;
         } else {
             active = 0;
         }
+        if(users.update(u)!=null){
+            loadTable(users.readAll());
+            JOptionPane.showMessageDialog(this, " Update Success ! ");
+        } else {
+            JOptionPane.showMessageDialog(this, " Failed ! Again !! ");
+        
 
         if (username.length() != 0 || password.length() != 0) {
             if (users.readByName(username) == null) {
@@ -334,7 +350,7 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         if(row == -1){
             JOptionPane.showMessageDialog(this," Choose Row ");
         }else{
-            String username =(String) tblUsers.getValueAt(row, 0);
+            String username =(String) tblUsers.getValueAt(row, 1);
             if(users.delete(username)){
                 JOptionPane.showMessageDialog(this," Delete Success ! ");
                 loadTable(users.readAll());
@@ -348,6 +364,14 @@ public class InformationUsersFrm extends javax.swing.JFrame {
     private void cmbRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRoleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbRoleActionPerformed
+
+    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddressActionPerformed
+
+    private void cmbIsActiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbIsActiveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbIsActiveActionPerformed
 
     /**
      * @param args the command line arguments
