@@ -21,7 +21,7 @@ public class InvoiceidAction {
         dao=new InvoiceidDAO();
     }
 
-    public InvoiceidDTO create(InvoiceidDTO c) {
+    public int create(InvoiceidDTO c) {
         return dao.create(c);
     }
 
@@ -37,8 +37,11 @@ public class InvoiceidAction {
         return dao.delete(id);
     }
     
-    public int key(){
-        return dao.key();
+    public List<InvoiceidDTO> readByDate(java.util.Date dateFrom, java.util.Date dateTo) {
+        return dao.readByDate(dateFrom, dateTo);
     }
-    
+     public List<InvoiceidDTO> readByUsersId(int id) {
+         return dao.readByUsersId(id);
+     }
+
 }

@@ -5,71 +5,17 @@
  */
 package view;
 
-import bus.BillAction;
-import bus.InvoiceidAction;
-import bus.ScheduleAction;
-import dto.BillsDTO;
-import dto.CourseDTO;
-import dto.CustomerDTO;
-import dto.InvoiceidDTO;
-import dto.ScheduleDTO;
-import dto.Users;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author thien
  */
-public class BillFrm extends javax.swing.JFrame {
-
-    ScheduleAction schedule = null;
-    BillAction bill = null;
-    InvoiceidAction invoiceid = null;
-    ScheduleDTO scheDTO = null;
-    BillsDTO biDTO = null;
-    InvoiceidDTO invoiceDTO = null;
-    int cou=0;
-    float pri=0;
-    Users u = null;
-    int id=0;
-    int cusid=0;
+public class pnlBill extends javax.swing.JPanel {
 
     /**
-     * Creates new form BillFrm
+     * Creates new form pnlBill
      */
-    public BillFrm() {
+    public pnlBill() {
         initComponents();
-        schedule = new ScheduleAction();
-    }
-
-    public BillFrm(Users users, CustomerDTO customer, CourseDTO course, Date date) {
-        initComponents();
-        lblName.setText(customer.getName());
-        lblPhone.setText(String.valueOf(customer.getPhone()));
-        lblAddress.setText(customer.getAddress());
-        lblNameCourse.setText(course.getName());
-        lblTime.setText(String.valueOf(course.getTime()));
-        lblTimeStart.setText(String.valueOf(date));
-        Calendar c1 = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-        c1.setTime(date);
-        c2.setTime(date);
-        c1.roll(Calendar.DATE, course.getTime());
-        lblTimeEnd.setText(String.valueOf(c1.getTime()));
-        lblDescription.setText(course.getDescription());
-        lblTotal.setText(String.valueOf(course.getPrice()));
-
-        scheDTO = new ScheduleDTO(customer.getId(), course.getId(), String.valueOf(c2.getTime()), String.valueOf(c1.getTime()), course.getDescription());
-        cou = course.getId();
-        pri = course.getPrice();
-        cusid = customer.getId();
-        Date date1 = new Date();
-        invoiceDTO = new InvoiceidDTO(users.getId(), date1, course.getPrice());
-        u = users;
     }
 
     /**
@@ -81,65 +27,61 @@ public class BillFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        lblFrom = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        lblFrom2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        lblTotal = new javax.swing.JLabel();
-        lblName = new javax.swing.JLabel();
-        lblPhone = new javax.swing.JLabel();
-        lblAddress = new javax.swing.JLabel();
-        lblNameCourse = new javax.swing.JLabel();
-        lblTime = new javax.swing.JLabel();
-        lblTimeStart = new javax.swing.JLabel();
-        lblTimeEnd = new javax.swing.JLabel();
-        lblDescription = new javax.swing.JLabel();
-        bntPay = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        lblName = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lblPhone = new javax.swing.JLabel();
+        lblFrom = new javax.swing.JLabel();
+        lblAddress = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblNameCourse = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lblTime = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblTimeStart = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblTimeEnd = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lblDescription = new javax.swing.JLabel();
+        lblFrom2 = new javax.swing.JLabel();
+        bntPay = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        lblTotal = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel2.setText("Time:");
-
-        lblFrom.setText("Time Start:");
-
-        jLabel7.setText("Description:");
-
-        jLabel3.setText("Name:");
-
-        jLabel4.setText("Phone:");
-
-        jLabel5.setText("Address:");
-
-        jLabel6.setText("Name Course:");
-
-        lblFrom2.setText("Time End:");
-
-        jLabel1.setText("Total");
-
-        lblTotal.setText("0");
+        jButton1.setText("Printf");
 
         lblName.setText("0");
 
+        jLabel2.setText("Time:");
+
         lblPhone.setText("0");
+
+        lblFrom.setText("Time Start:");
 
         lblAddress.setText("0");
 
+        jLabel7.setText("Description:");
+
         lblNameCourse.setText("0");
+
+        jLabel3.setText("Name:");
 
         lblTime.setText("0");
 
+        jLabel4.setText("Phone:");
+
         lblTimeStart.setText("0");
+
+        jLabel5.setText("Address:");
 
         lblTimeEnd.setText("0");
 
+        jLabel6.setText("Name Course:");
+
         lblDescription.setText("0");
+
+        lblFrom2.setText("Time End:");
 
         bntPay.setText("Pay");
         bntPay.addActionListener(new java.awt.event.ActionListener() {
@@ -148,12 +90,14 @@ public class BillFrm extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Total");
+
         jButton2.setText("Close");
 
-        jButton1.setText("Printf");
+        lblTotal.setText("0");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -182,7 +126,7 @@ public class BillFrm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 262, Short.MAX_VALUE)
+                        .addGap(0, 153, Short.MAX_VALUE)
                         .addComponent(bntPay, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -230,7 +174,7 @@ public class BillFrm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(lblDescription))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblTotal))
@@ -241,8 +185,6 @@ public class BillFrm extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPayActionPerformed
@@ -250,9 +192,9 @@ public class BillFrm extends javax.swing.JFrame {
         invoiceid = new InvoiceidAction();
         bill = new BillAction();
         if (schedule.create(scheDTO) != null) {
-            
+
             if ((id = invoiceid.create(invoiceDTO)) != 0) {
-                biDTO = new BillsDTO(id, cou,cusid, pri);
+                biDTO = new BillsDTO(id, cusid, cou, pri);
                 JOptionPane.showMessageDialog(this, biDTO.toString());
                 if (bill.create(biDTO) != null) {
                     JOptionPane.showMessageDialog(this, "Access!!");
@@ -268,12 +210,8 @@ public class BillFrm extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Error!!");
         }
-
     }//GEN-LAST:event_bntPayActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntPay;

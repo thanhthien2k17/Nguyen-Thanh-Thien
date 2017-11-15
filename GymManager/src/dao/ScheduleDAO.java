@@ -12,7 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,9 +26,10 @@ import java.util.logging.Logger;
 public class ScheduleDAO {
 
     Connection con = null;
-    final private String SQLCREATE = "INSERT INTO SCHEDULE VALUE(?,?,?,?,?,?) ";
+
+    final private String SQLCREATE = "INSERT INTO SCHEDULE VALUES(?,?,?,?,?) ";
     final private String SQLREADALL = "SELECT * FROM SCHEDULE ";
-    final private String SQLUPDATE = "UPDATE SCHEDULE SET CUSTOMERID = ?, COURSEID = ?, USERID = ? , TIMESTART = ? , TIMEEND = ?,CAREREGIME = ? WHERE ID = ?";
+    final private String SQLUPDATE = "UPDATE SCHEDULE SET CUSTOMERID = ?, COURSEID = ?, TIMESTART = ? , TIMEEND = ?,CAREREGIME = ? WHERE ID = ?";
     final private String SQLDELETE = "DELETE FROM SCHEDULE WHERE ID = ?";
 
     public ScheduleDAO() {
@@ -38,10 +41,9 @@ public class ScheduleDAO {
             PreparedStatement ps = con.prepareStatement(SQLCREATE);
             ps.setInt(1, s.getCustomerid());
             ps.setInt(2, s.getCourseid());
-            ps.setInt(3, s.getUserid());
-            ps.setString(4, s.getTimeStart());
-            ps.setString(5, s.getTimeEnd());
-            ps.setString(6, s.getCareRegime());
+            ps.setString(3, s.getTimeStart());
+            ps.setString(4, s.getTimeEnd());
+            ps.setString(5, s.getCareRegime());
 
             int i = ps.executeUpdate();
             return s;
@@ -62,10 +64,9 @@ public class ScheduleDAO {
                     s.setId(rs.getInt(1));
                     s.setCustomerid(rs.getInt(2));
                     s.setCourseid(rs.getInt(3));
-                    s.setUserid(rs.getInt(4));
-                    s.setTimeStart(rs.getString(5));
-                    s.setTimeEnd(rs.getString(6));
-                    s.setCareRegime(rs.getString(7));
+                    s.setTimeStart(rs.getString(4));
+                    s.setTimeEnd(rs.getString(5));
+                    s.setCareRegime(rs.getString(6));
                     list.add(s);
                 }
                 return list;
@@ -81,11 +82,10 @@ public class ScheduleDAO {
             PreparedStatement ps = con.prepareStatement(SQLUPDATE);
             ps.setInt(1, s.getCustomerid());
             ps.setInt(2, s.getCourseid());
-            ps.setInt(3, s.getUserid());
-            ps.setString(4, s.getTimeStart());
-            ps.setString(5, s.getTimeEnd());
-            ps.setString(6, s.getCareRegime());
-            ps.setInt(7, s.getId());
+            ps.setString(3, s.getTimeStart());
+            ps.setString(4, s.getTimeEnd());
+            ps.setString(5, s.getCareRegime());
+            ps.setInt(6, s.getId());
             int i = ps.executeUpdate();
             if (i != 0) {
                 return s;

@@ -5,57 +5,17 @@
  */
 package view;
 
-import bus.CustomerAction;
-import dto.CustomerDTO;
-import dto.Users;
-import java.util.List;
-import java.util.Vector;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author Aptech
+ * @author thien
  */
-public class CustomerFrm extends javax.swing.JFrame {
+public class pnlCustomer extends javax.swing.JPanel {
 
-    CustomerAction ac = null;
-    int id;
-    Users user=null;
     /**
-     * Creates new form CustomerFrm
+     * Creates new form pnlCustomer
      */
-    
-    public CustomerFrm() {
-    }
-
-    public CustomerFrm(Users u) {
+    public pnlCustomer() {
         initComponents();
-        user=u;
-        ac = new CustomerAction();
-        setSize(700, 700);
-        setLocationRelativeTo(null);
-        loadTable(ac.readAll());
-    }
-
-    void loadTable(List<CustomerDTO> readAll) {
-        Vector cols = new Vector();
-        cols.add("ID");
-        cols.add("Name");
-        cols.add("Phone");
-        cols.add("Address");
-        Vector rows = new Vector();
-        for (CustomerDTO c : readAll) {
-            Vector row = new Vector();
-            row.add(c.getId());
-            row.add(c.getName());
-            row.add(c.getPhone());
-            row.add(c.getAddress());
-            rows.add(row);
-        }
-        tblCustomer.setModel(new DefaultTableModel(rows, cols));
-        tblCustomer.updateUI();
-        spnCustomer.setViewportView(this.tblCustomer);
     }
 
     /**
@@ -67,8 +27,6 @@ public class CustomerFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblName = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
         lblPhone = new javax.swing.JLabel();
         txtAddress = new javax.swing.JTextField();
@@ -78,12 +36,10 @@ public class CustomerFrm extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         spnCustomer = new javax.swing.JScrollPane();
         tblCustomer = new javax.swing.JTable();
+        lblName = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
+        txtName = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        lblName.setText("Name");
 
         lblPhone.setText("Phone");
 
@@ -134,6 +90,8 @@ public class CustomerFrm extends javax.swing.JFrame {
         });
         spnCustomer.setViewportView(tblCustomer);
 
+        lblName.setText("Name");
+
         jButton6.setText("Close");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,8 +106,8 @@ public class CustomerFrm extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -217,8 +175,6 @@ public class CustomerFrm extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
@@ -271,7 +227,6 @@ public class CustomerFrm extends javax.swing.JFrame {
         txtName.setText(String.valueOf(tblCustomer.getValueAt(row, 1)));
         txtPhone.setText(String.valueOf(tblCustomer.getValueAt(row, 2)));
         txtAddress.setText(String.valueOf(tblCustomer.getValueAt(row, 3)));
-
     }//GEN-LAST:event_tblCustomerMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -286,9 +241,6 @@ public class CustomerFrm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

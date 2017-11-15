@@ -6,6 +6,7 @@
 package dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -14,20 +15,20 @@ import java.io.Serializable;
 public class InvoiceidDTO implements Serializable, Comparable<InvoiceidDTO>{
     private int id;
     private int userid;
-    private String datetime;
+    private Date datetime;
     private float total;
 
     public InvoiceidDTO() {
     }
 
-    public InvoiceidDTO(int id, int userid, String datetime, int total) {
+    public InvoiceidDTO(int id, int userid, Date datetime, float total) {
         this.id = id;
         this.userid = userid;
         this.datetime = datetime;
         this.total = total;
     }
 
-    public InvoiceidDTO(int userid, String datetime, float total) {
+    public InvoiceidDTO(int userid, Date datetime, float total) {
         this.userid = userid;
         this.datetime = datetime;
         this.total = total;
@@ -49,11 +50,11 @@ public class InvoiceidDTO implements Serializable, Comparable<InvoiceidDTO>{
         this.userid = userid;
     }
 
-    public String getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(String datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 

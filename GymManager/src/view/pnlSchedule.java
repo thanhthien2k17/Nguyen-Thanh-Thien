@@ -5,25 +5,17 @@
  */
 package view;
 
-import dto.Users;
-
 /**
  *
  * @author thien
  */
-public class ScheduleFrm extends javax.swing.JFrame {
+public class pnlSchedule extends javax.swing.JPanel {
 
     /**
-     * Creates new form ScheduleFrm
+     * Creates new form pnlSchedule
      */
-    Users user=null;
-
-    public ScheduleFrm() {
-    }
-    
-    public ScheduleFrm(Users u) {
+    public pnlSchedule() {
         initComponents();
-        user=u;
     }
 
     /**
@@ -37,8 +29,6 @@ public class ScheduleFrm extends javax.swing.JFrame {
 
         jButton6 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton6.setText("Close");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -54,8 +44,8 @@ public class ScheduleFrm extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -74,8 +64,6 @@ public class ScheduleFrm extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -90,10 +78,6 @@ public class ScheduleFrm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

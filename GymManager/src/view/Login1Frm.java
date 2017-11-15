@@ -123,10 +123,11 @@ public class Login1Frm extends javax.swing.JFrame {
             if (user.getPassword().startsWith(new HashUtils().hashmd5(pass))) {
                 if (user.getIsActive() == 1) {
                     if (user.getRoleId()==1) {
+                        JOptionPane.showMessageDialog(this, "Access");
                         MainFrm mf = new MainFrm(user);
                         mf.setVisible(true);
                         this.dispose();
-                        JOptionPane.showMessageDialog(this, "Access");
+                        
                     } else {
                         JOptionPane.showMessageDialog(this, "You don't have login right");
                     }

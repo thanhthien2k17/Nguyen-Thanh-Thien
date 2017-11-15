@@ -5,95 +5,17 @@
  */
 package view;
 
-import bus.CourseAction;
-import bus.CustomerAction;
-import dto.CourseDTO;
-import dto.CustomerDTO;
-import dto.Users;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import static java.util.Date.from;
-import java.util.List;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author thien
  */
-public class SaleFrm extends javax.swing.JFrame {
-
-    CustomerAction customer = null;
-    CourseAction course = null;
-    Users users = null;
-    CustomerDTO cus = null;
-    CourseDTO cou = null;
+public class pnlSale extends javax.swing.JPanel {
 
     /**
-     * Creates new form SaleFrm
+     * Creates new form pnlSale
      */
-    public SaleFrm() {
+    public pnlSale() {
         initComponents();
-        setSize(700, 1060);
-        setLocationRelativeTo(null);
-    }
-
-    public SaleFrm(Users u) {
-        initComponents();
-        
-        customer = new CustomerAction();
-        course = new CourseAction();
-
-        loadTableCourse(course.readAll());
-        loadTableCustomer(customer.readAll());
-        users = u;
-    }
-
-    void loadTableCourse(List<CourseDTO> readAll) {
-        Vector cols = new Vector();
-        cols.add("ID");
-        cols.add("Name");
-        cols.add("Time");
-        cols.add("Price");
-        cols.add("Description");
-
-        Vector rows = new Vector();
-        for (CourseDTO c : readAll) {
-            Vector row = new Vector();
-            row.add(c.getId());
-            row.add(c.getName());
-            row.add(c.getTime());
-            row.add(c.getPrice());
-            row.add(c.getDescription());
-            rows.add(row);
-        }
-        tblCourse.setModel(new DefaultTableModel(rows, cols));
-        tblCourse.updateUI();
-        spnCourse.setViewportView(this.tblCourse);
-    }
-
-    void loadTableCustomer(List<CustomerDTO> readAll) {
-        Vector cols = new Vector();
-        cols.add("ID");
-        cols.add("Name");
-        cols.add("Phone");
-        cols.add("Address");
-        Vector rows = new Vector();
-        for (CustomerDTO c : readAll) {
-            Vector row = new Vector();
-            row.add(c.getId());
-            row.add(c.getName());
-            row.add(c.getPhone());
-            row.add(c.getAddress());
-            rows.add(row);
-        }
-        tblCustomer.setModel(new DefaultTableModel(rows, cols));
-        tblCustomer.updateUI();
-        spnCustomer.setViewportView(this.tblCustomer);
     }
 
     /**
@@ -105,14 +27,14 @@ public class SaleFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtName = new javax.swing.JTextField();
-        txtPhone = new javax.swing.JTextField();
-        txtAddress = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        lblId1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         lblCourse = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -128,36 +50,39 @@ public class SaleFrm extends javax.swing.JFrame {
         tblCustomer = new javax.swing.JTable();
         spnCourse = new javax.swing.JScrollPane();
         tblCourse = new javax.swing.JTable();
+        txtName = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
         bntCnP = new javax.swing.JButton();
+        txtAddress = new javax.swing.JTextField();
         lblId = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        lblId1 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel8.setText("Id Customer:");
 
-        txtName.setText("0");
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
-
-        txtPhone.setText("0");
-
-        txtAddress.setText("0");
-
-        jLabel3.setText("Name:");
-
-        jLabel4.setText("Phone:");
+        jLabel9.setText("Id Course:");
 
         jLabel5.setText("Address:");
 
+        lblId1.setText("0");
+
         jLabel6.setText("Name Course:");
 
+        jButton6.setText("Close");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         lblCourse.setText("0");
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Time:");
 
@@ -227,32 +152,27 @@ public class SaleFrm extends javax.swing.JFrame {
         });
         spnCourse.setViewportView(tblCourse);
 
+        txtName.setText("0");
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+
+        txtPhone.setText("0");
+
         bntCnP.setText("Create Custome and Pay");
+
+        txtAddress.setText("0");
 
         lblId.setText("0");
 
-        jLabel8.setText("Id Customer:");
+        jLabel3.setText("Name:");
 
-        jLabel9.setText("Id Course:");
+        jLabel4.setText("Phone:");
 
-        lblId1.setText("0");
-
-        jButton6.setText("Close");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -307,7 +227,7 @@ public class SaleFrm extends javax.swing.JFrame {
                                     .addComponent(bntReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(bntPay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(lblId1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -358,7 +278,7 @@ public class SaleFrm extends javax.swing.JFrame {
                         .addComponent(bntReset)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bntCnP)))
-                .addGap(18, 73, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(spnCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                     .addComponent(spnCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -367,26 +287,19 @@ public class SaleFrm extends javax.swing.JFrame {
                     .addComponent(jButton6)
                     .addComponent(jButton1)))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCustomerMouseClicked
-        int row = tblCustomer.getSelectedRow();
-        lblId.setText(String.valueOf(tblCustomer.getValueAt(row, 0)));
-        txtName.setText((String) tblCustomer.getValueAt(row, 1));
-        txtPhone.setText(String.valueOf(tblCustomer.getValueAt(row, 2)));
-        txtAddress.setText(String.valueOf(tblCustomer.getValueAt(row, 3)));
-    }//GEN-LAST:event_tblCustomerMouseClicked
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void tblCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCourseMouseClicked
-        int row = tblCourse.getSelectedRow();
-        lblId1.setText(String.valueOf(tblCourse.getValueAt(row, 0)));
-        lblCourse.setText(String.valueOf(tblCourse.getValueAt(row, 1)));
-        lblTime.setText(String.valueOf(tblCourse.getValueAt(row, 2)));
-        lblPrice.setText(String.valueOf(tblCourse.getValueAt(row, 3)));
-        lblDescription.setText(String.valueOf(tblCourse.getValueAt(row, 4)));
-    }//GEN-LAST:event_tblCourseMouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        MainFrm mf = new MainFrm(users);
+        mf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void bntPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPayActionPerformed
         int idCourse = Integer.parseInt(lblId1.getText().trim());
@@ -416,30 +329,31 @@ public class SaleFrm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_bntPayActionPerformed
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
-
     private void bntResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntResetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bntResetActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void tblCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCustomerMouseClicked
+        int row = tblCustomer.getSelectedRow();
+        lblId.setText(String.valueOf(tblCustomer.getValueAt(row, 0)));
+        txtName.setText((String) tblCustomer.getValueAt(row, 1));
+        txtPhone.setText(String.valueOf(tblCustomer.getValueAt(row, 2)));
+        txtAddress.setText(String.valueOf(tblCustomer.getValueAt(row, 3)));
+    }//GEN-LAST:event_tblCustomerMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        MainFrm mf = new MainFrm(users);
-        mf.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void tblCourseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCourseMouseClicked
+        int row = tblCourse.getSelectedRow();
+        lblId1.setText(String.valueOf(tblCourse.getValueAt(row, 0)));
+        lblCourse.setText(String.valueOf(tblCourse.getValueAt(row, 1)));
+        lblTime.setText(String.valueOf(tblCourse.getValueAt(row, 2)));
+        lblPrice.setText(String.valueOf(tblCourse.getValueAt(row, 3)));
+        lblDescription.setText(String.valueOf(tblCourse.getValueAt(row, 4)));
+    }//GEN-LAST:event_tblCourseMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntCnP;

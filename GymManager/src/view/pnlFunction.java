@@ -5,28 +5,17 @@
  */
 package view;
 
-import bus.FunctionAction;
-import dto.Functions;
-import java.util.List;
-import java.util.Vector;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author phong
+ * @author thien
  */
-public class FunctionIFrm extends javax.swing.JInternalFrame {
+public class pnlFunction extends javax.swing.JPanel {
 
     /**
-     * Creates new form FunctionIFrm
+     * Creates new form pnlFunction
      */
-    FunctionAction functions;
-
-    public FunctionIFrm() {
+    public pnlFunction() {
         initComponents();
-        functions = new FunctionAction();
-        loadTable(functions.readAll());
     }
 
     /**
@@ -38,20 +27,26 @@ public class FunctionIFrm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnDelete = new javax.swing.JButton();
         spnFunction = new javax.swing.JScrollPane();
         tblFunction = new javax.swing.JTable();
+        jButton6 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         txtName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDes = new javax.swing.JTextArea();
         btnCreate = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnClose = new javax.swing.JButton();
 
-        setClosable(true);
-        setTitle("Functions");
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/delete-cross.png"))); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         tblFunction.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -71,7 +66,21 @@ public class FunctionIFrm extends javax.swing.JInternalFrame {
         });
         spnFunction.setViewportView(tblFunction);
 
+        jButton6.setText("Close");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Name");
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Description");
 
@@ -81,29 +90,25 @@ public class FunctionIFrm extends javax.swing.JInternalFrame {
 
         btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/hospital-symbol.png"))); // NOI18N
         btnCreate.setText("Create");
-
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/tick-mark.png"))); // NOI18N
-        btnUpdate.setText("Update");
-
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/delete-cross.png"))); // NOI18N
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+                btnCreateActionPerformed(evt);
             }
         });
 
-        btnClose.setText("Close");
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/tick-mark.png"))); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spnFunction, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnClose)
-                .addContainerGap())
+            .addComponent(spnFunction, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -120,12 +125,18 @@ public class FunctionIFrm extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(spnFunction, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(spnFunction, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -138,29 +149,20 @@ public class FunctionIFrm extends javax.swing.JInternalFrame {
                     .addComponent(btnCreate)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addGap(1, 1, 1)
-                .addComponent(btnClose)
-                .addContainerGap())
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6)
+                    .addComponent(jButton1))
+                .addGap(6, 6, 6))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblFunctionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFunctionMouseClicked
-        // TODO add your handling code here:
-        int row = tblFunction.getSelectedRow();
-        txtName.setText((String) tblFunction.getValueAt(row, 0));
-        txtDes.setText((String) tblFunction.getValueAt(row, 1));
-    }//GEN-LAST:event_tblFunctionMouseClicked
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         int row = tblFunction.getSelectedRow();
         if (row != -1) {
-            String name = txtName.getText().trim();
-            String des = txtDes.getText().trim();
-            int id = functions.readByNameFunction(name).getId();
-            if (functions.update(new Functions(id, name, des)) != null) {
+            int id = functions.readByNameFunction(txtName.getText()).getId();
+            if (functions.delete(id)) {
                 JOptionPane.showMessageDialog(this, "Success");
                 txtName.setText("");
                 txtDes.setText("");
@@ -171,11 +173,30 @@ public class FunctionIFrm extends javax.swing.JInternalFrame {
                 txtDes.setText("");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Select function to update");
+            JOptionPane.showMessageDialog(this, "Select function to delete");
             txtName.setText("");
             txtDes.setText("");
         }
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void tblFunctionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFunctionMouseClicked
+        // TODO add your handling code here:
+        int row = tblFunction.getSelectedRow();
+        txtName.setText((String) tblFunction.getValueAt(row, 0));
+        txtDes.setText((String) tblFunction.getValueAt(row, 1));
+    }//GEN-LAST:event_tblFunctionMouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        MainFrm mf = new MainFrm(user);
+        mf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
@@ -201,12 +222,14 @@ public class FunctionIFrm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnCreateActionPerformed
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         int row = tblFunction.getSelectedRow();
         if (row != -1) {
-            int id = functions.readByNameFunction(txtName.getText()).getId();
-            if (functions.delete(id)) {
+            String name = txtName.getText().trim();
+            String des = txtDes.getText().trim();
+            int id = functions.readByNameFunction(name).getId();
+            if (functions.update(new Functions(id, name, des)) != null) {
                 JOptionPane.showMessageDialog(this, "Success");
                 txtName.setText("");
                 txtDes.setText("");
@@ -217,23 +240,19 @@ public class FunctionIFrm extends javax.swing.JInternalFrame {
                 txtDes.setText("");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Select function to delete");
+            JOptionPane.showMessageDialog(this, "Select function to update");
             txtName.setText("");
             txtDes.setText("");
         }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_btnCloseActionPerformed
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClose;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
@@ -242,22 +261,4 @@ public class FunctionIFrm extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txtDes;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
-
-    private void loadTable(List<Functions> readAll) {
-        Vector cols = new Vector();
-        cols.add("Name");
-        cols.add("Description");
-
-        Vector rows = new Vector();
-        for (Functions f : readAll) {
-            Vector row = new Vector();
-            row.add(f.getName());
-            row.add(f.getDes());
-            rows.add(row);
-        }
-
-        tblFunction.setModel(new DefaultTableModel(rows, cols));
-        tblFunction.updateUI();
-        spnFunction.setViewportView(this.tblFunction);
-    }
 }

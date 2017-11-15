@@ -6,6 +6,7 @@
 package dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -15,7 +16,6 @@ public class ScheduleDTO implements Serializable, Comparable<ScheduleDTO>{
     private int id;
     private int customerid;
     private int courseid;
-    private int userid;
     private String timeStart;
     private String timeEnd;
     private String careRegime;
@@ -23,20 +23,19 @@ public class ScheduleDTO implements Serializable, Comparable<ScheduleDTO>{
     public ScheduleDTO() {
     }
 
-    public ScheduleDTO(int id, int customerid, int courseid, int userid, String timeStart, String timeEnd, String careRegime) {
+    public ScheduleDTO(int id, int customerid, int courseid,String timeStart, String timeEnd, String careRegime) {
         this.id = id;
         this.customerid = customerid;
         this.courseid = courseid;
-        this.userid = userid;
+     
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.careRegime = careRegime;
     }
 
-    public ScheduleDTO(int customerid, int courseid, int userid, String timeStart, String timeEnd, String careRegime) {
+    public ScheduleDTO(int customerid, int courseid, String timeStart, String timeEnd, String careRegime) {
         this.customerid = customerid;
         this.courseid = courseid;
-        this.userid = userid;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.careRegime = careRegime;
@@ -66,14 +65,6 @@ public class ScheduleDTO implements Serializable, Comparable<ScheduleDTO>{
         this.courseid = courseid;
     }
 
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
-    }
-
     public String getTimeStart() {
         return timeStart;
     }
@@ -100,7 +91,7 @@ public class ScheduleDTO implements Serializable, Comparable<ScheduleDTO>{
 
     @Override
     public String toString() {
-        return "ScheduleDTO{" + "id=" + id + ", customerid=" + customerid + ", courseid=" + courseid + ", userid=" + userid + ", timeStart=" + timeStart + ", timeEnd=" + timeEnd + ", careRegime=" + careRegime + '}';
+        return "ScheduleDTO{" + "id=" + id + ", customerid=" + customerid + ", courseid=" + courseid + ", timeStart=" + timeStart + ", timeEnd=" + timeEnd + ", careRegime=" + careRegime + '}';
     }
     
     @Override

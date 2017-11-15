@@ -5,41 +5,17 @@
  */
 package view;
 
-import bus.FunctionRoleAction;
-import bus.FunctionAction;
-import bus.RoleAction;
-import dto.FunctionRoles;
-import dto.Functions;
-import dto.Roles;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author phong
+ * @author thien
  */
-public class FunctionRoleIFrm extends javax.swing.JInternalFrame {
+public class pnlFunctionRole extends javax.swing.JPanel {
 
     /**
-     * Creates new form FunctionRoleIFrm
+     * Creates new form pnlFunctionRole
      */
-    FunctionRoleAction fr;
-    FunctionAction functions;
-    RoleAction roles;
-
-    public FunctionRoleIFrm() {
+    public pnlFunctionRole() {
         initComponents();
-
-        fr = new FunctionRoleAction();
-        functions = new FunctionAction();
-        roles = new RoleAction();
-        loadTable(fr.readAll());
-        loadList(functions.readAll());
-        loadCombobox(roles.readAll());
     }
 
     /**
@@ -51,36 +27,16 @@ public class FunctionRoleIFrm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        spnFunctionRole = new javax.swing.JScrollPane();
-        tblFunctionRole = new javax.swing.JTable();
         spnFunction = new javax.swing.JScrollPane();
         tblFunction = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         cmbRole = new javax.swing.JComboBox<>();
         btnCreate = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        btnClose = new javax.swing.JButton();
-
-        setClosable(true);
-        setTitle("Function Roles");
-
-        tblFunctionRole.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblFunctionRole.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblFunctionRoleMouseClicked(evt);
-            }
-        });
-        spnFunctionRole.setViewportView(tblFunctionRole);
+        jButton6 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        spnFunctionRole = new javax.swing.JScrollPane();
+        tblFunctionRole = new javax.swing.JTable();
 
         tblFunction.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,15 +71,40 @@ public class FunctionRoleIFrm extends javax.swing.JInternalFrame {
             }
         });
 
-        btnClose.setText("Close");
-        btnClose.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setText("Close");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        tblFunctionRole.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblFunctionRole.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblFunctionRoleMouseClicked(evt);
+            }
+        });
+        spnFunctionRole.setViewportView(tblFunctionRole);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(spnFunctionRole, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -145,10 +126,12 @@ public class FunctionRoleIFrm extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 87, Short.MAX_VALUE))
+                        .addGap(0, 62, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnClose)))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -165,18 +148,13 @@ public class FunctionRoleIFrm extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCreate)
                     .addComponent(btnUpdate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(btnClose)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
@@ -198,7 +176,7 @@ public class FunctionRoleIFrm extends javax.swing.JInternalFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Fail");
                 }
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(this, "Role existed");
             }
         } else {
@@ -251,8 +229,19 @@ public class FunctionRoleIFrm extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Select role to update");
         }
-
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        MainFrm mf = new MainFrm(user);
+        mf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tblFunctionRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFunctionRoleMouseClicked
         // TODO add your handling code here:
@@ -275,72 +264,15 @@ public class FunctionRoleIFrm extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClose;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbRole;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane spnFunction;
     private javax.swing.JScrollPane spnFunctionRole;
     private javax.swing.JTable tblFunction;
     private javax.swing.JTable tblFunctionRole;
     // End of variables declaration//GEN-END:variables
-
-    private void loadTable(List<FunctionRoles> readAll) {
-        Vector cols = new Vector();
-        cols.add("Role");
-        cols.add("Function");
-        Vector rows = new Vector();
-        for (FunctionRoles f : readAll) {
-            for (Integer i : f.getFunctions()) {
-                Vector row = new Vector();
-                row.add(roles.readById(f.getRole()).getName());
-                row.add(functions.readById(i).getName());
-                rows.add(row);
-            }
-        }
-
-        tblFunctionRole.setModel(new DefaultTableModel(rows, cols));
-        tblFunctionRole.updateUI();
-        spnFunctionRole.setViewportView(this.tblFunctionRole);
-    }
-
-    private void loadList(List<Functions> readAll) {
-        Vector cols = new Vector();
-        cols.add("Select");
-        cols.add("Function");
-
-        Vector rows = new Vector();
-        for (Functions f : readAll) {
-            Vector row = new Vector();
-            row.add(false);
-            row.add(f.getName());
-            rows.add(row);
-        }
-
-        tblFunction.setModel(new DefaultTableModel(rows, cols) {
-            @Override
-            public Class<?> getColumnClass(int column) {
-                switch (column) {
-                    case 0:
-                        return Boolean.class;
-                    default:
-                        return String.class;
-                }
-            }
-        });
-        tblFunction.getColumn("Select").setPreferredWidth(5);
-        tblFunction.updateUI();
-        spnFunction.setViewportView(this.tblFunction);
-
-    }
-
-    private void loadCombobox(List<Roles> readAll) {
-        Vector items = new Vector();
-        for (Roles r : readAll) {
-            items.add(r.getName());
-        }
-        cmbRole.setModel(new DefaultComboBoxModel(items));
-        cmbRole.updateUI();
-    }
 }

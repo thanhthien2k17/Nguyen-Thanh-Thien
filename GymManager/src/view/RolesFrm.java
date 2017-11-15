@@ -7,6 +7,7 @@ package view;
 
 import bus.RoleAction;
 import dto.Roles;
+import dto.Users;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -14,17 +15,22 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author phong
+ * @author thien
  */
-public class RolesIFrm extends javax.swing.JInternalFrame {
+public class RolesFrm extends javax.swing.JFrame {
 
     /**
-     * Creates new form RolesIFrm
+     * Creates new form RolesFrm
      */
     RoleAction role;
+    Users user = null;
 
-    public RolesIFrm() {
+    public RolesFrm() {
+    }
+
+    public RolesFrm(Users u) {
         initComponents();
+        user=u;
         role = new RoleAction();
         loadTable(role.readAll());
     }
@@ -38,9 +44,6 @@ public class RolesIFrm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        spnRole = new javax.swing.JScrollPane();
-        tblRole = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -48,10 +51,43 @@ public class RolesIFrm extends javax.swing.JInternalFrame {
         btnCreate = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnClose = new javax.swing.JButton();
+        spnRole = new javax.swing.JScrollPane();
+        tblRole = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setClosable(true);
-        setTitle("Roles");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setText("Description");
+
+        txtDes.setColumns(20);
+        txtDes.setRows(5);
+        jScrollPane1.setViewportView(txtDes);
+
+        btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/hospital-symbol.png"))); // NOI18N
+        btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/tick-mark.png"))); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/delete-cross.png"))); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         tblRole.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,34 +109,33 @@ public class RolesIFrm extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Name");
 
-        jLabel2.setText("Description");
+        jButton6.setText("Close");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
-        txtDes.setColumns(20);
-        txtDes.setRows(5);
-        jScrollPane1.setViewportView(txtDes);
-
-        btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/hospital-symbol.png"))); // NOI18N
-        btnCreate.setText("Create");
-
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/tick-mark.png"))); // NOI18N
-        btnUpdate.setText("Update");
-
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/delete-cross.png"))); // NOI18N
-        btnDelete.setText("Delete");
-
-        btnClose.setText("Close");
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spnRole, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+            .addComponent(spnRole, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnClose)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
@@ -113,14 +148,14 @@ public class RolesIFrm extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete))
                     .addComponent(jScrollPane1)
-                    .addComponent(txtName))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(spnRole, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(spnRole, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -133,62 +168,15 @@ public class RolesIFrm extends javax.swing.JInternalFrame {
                     .addComponent(btnCreate)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addGap(7, 7, 7)
-                .addComponent(btnClose)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_btnCloseActionPerformed
-
-    private void tblRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRoleMouseClicked
-        // TODO add your handling code here:
-        int row = tblRole.getSelectedRow();
-        txtName.setText((String) tblRole.getValueAt(row, 0));
-        txtDes.setText((String) tblRole.getValueAt(row, 1));
-    }//GEN-LAST:event_tblRoleMouseClicked
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        int row = tblRole.getSelectedRow();
-        if (row != -1) {
-            if (role.delete(role.readByName(txtName.getText()).getId())) {
-                JOptionPane.showMessageDialog(this, "Success");
-                loadTable(role.readAll());
-                txtName.setText("");
-                txtDes.setText("");
-            } else {
-                JOptionPane.showMessageDialog(this, "Fail");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Select role to delete");
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-        int row = tblRole.getSelectedRow();
-        if (row != -1) {
-            String name = txtName.getText().trim();
-            String des = txtDes.getText().trim();
-            int id = role.readByName(name).getId();
-            if (role.update(new Roles(id, name, des)) != null) {
-                JOptionPane.showMessageDialog(this, "Success");
-                txtName.setText("");
-                txtDes.setText("");
-                loadTable(role.readAll());
-            } else {
-                JOptionPane.showMessageDialog(this, "Fail");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Select role to update");
-        }
-    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
@@ -212,12 +200,72 @@ public class RolesIFrm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnCreateActionPerformed
 
+    private void tblRoleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRoleMouseClicked
+        // TODO add your handling code here:
+        int row = tblRole.getSelectedRow();
+        txtName.setText((String) tblRole.getValueAt(row, 0));
+        txtDes.setText((String) tblRole.getValueAt(row, 1));
+    }//GEN-LAST:event_tblRoleMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        int row = tblRole.getSelectedRow();
+        if (row != -1) {
+            String name = txtName.getText().trim();
+            String des = txtDes.getText().trim();
+            int id = role.readByName(name).getId();
+            if (role.update(new Roles(id, name, des)) != null) {
+                JOptionPane.showMessageDialog(this, "Success");
+                txtName.setText("");
+                txtDes.setText("");
+                loadTable(role.readAll());
+            } else {
+                JOptionPane.showMessageDialog(this, "Fail");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Select role to update");
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int row = tblRole.getSelectedRow();
+        if (row != -1) {
+            if (role.delete(role.readByName(txtName.getText()).getId())) {
+                JOptionPane.showMessageDialog(this, "Success");
+                loadTable(role.readAll());
+                txtName.setText("");
+                txtDes.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Fail");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Select role to delete");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        MainFrm mf = new MainFrm(user);
+        mf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClose;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -226,7 +274,6 @@ public class RolesIFrm extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txtDes;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
-
     private void loadTable(List<Roles> readAll) {
         Vector cols = new Vector();
         cols.add("Name");

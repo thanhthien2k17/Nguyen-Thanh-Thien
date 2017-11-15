@@ -19,12 +19,12 @@ import java.util.logging.Logger;
 public class FunctionsDAO {
 
     Connection con;
-    final String SQLCREATE = "INSERT INTO FUNCTIONS VALUES(?,?)";
-    final String SQLREADALL = "SELECT * FROM FUNCTIONS";
-    final String SQLREADBYID = "SELECT * FROM FUNCTIONS WHERE ID=?";
-    final String SQLREADBYNAMEFUNCTION = "SELECT * FROM FUNCTIONS WHERE NAME=?";
-    final String SQLUPDATE = "UPDATE FUNCTIONS SET NAME=?, DESCRIPTION=? WHERE ID=?";
-    final String SQLDELETE = "DELETE FROM FUNCTIONS WHERE ID=?";
+    final String SQLCREATE = "INSERT INTO FUNTIONS VALUES(?,?)";
+    final String SQLREADALL = "SELECT * FROM FUNTIONS";
+    final String SQLREADBYID = "SELECT * FROM FUNTIONS WHERE ID=?";
+    final String SQLREADBYNAMEFUNCTION = "SELECT * FROM FUNTIONS WHERE NAME=?";
+    final String SQLUPDATE = "UPDATE FUNTIONS SET NAME=?, DESCRIPTION=? WHERE ID=?";
+    final String SQLDELETE = "DELETE FROM FUNTIONS WHERE ID=?";
 
     public FunctionsDAO() {
         con = new DBConnector().getCon();

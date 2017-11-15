@@ -22,21 +22,24 @@ import java.util.logging.Logger;
  * @author Admin
  */
 public class BillsDAO {
+
     Connection con = null;
-    final private String SQLCREATE = "INSERT INTO BILLS VALUE(?,?,?)";
-    final private String SQLREADALL= "SELECT * FROM BILLS ";
-    final private String SQLUPDATE = "UPDATE BILLS SET INVOICEID = ? , COURSEID = ?, PRICE = ? WHERE ID = ? ";
+    final private String SQLCREATE = "INSERT INTO BILLS VALUES(?,?,?,?)";
+    final private String SQLREADALL = "SELECT * FROM BILLS ";
+    final private String SQLUPDATE = "UPDATE BILLS SET INVOICEID = ? , COURSEID = ?,CUSTOMERID=?, PRICE = ? WHERE ID = ? ";
     final private String SQLDELETE = "DELETE FROM BILLS WHERE ID = ?";
 
     public BillsDAO() {
-         con = new DBConnector().getCon();
+        con = new DBConnector().getCon();
     }
-    public BillsDTO create (BillsDTO b){
-         try {
+
+    public BillsDTO create(BillsDTO b) {
+        try {
             PreparedStatement ps = con.prepareStatement(SQLCREATE);
             ps.setInt(1, b.getInvoiceid());
             ps.setInt(2, b.getCourseid());
-            ps.setFloat(3, b.getPrice());
+            ps.setInt(3, b.getCustomerid());
+            ps.setFloat(4, b.getPrice());
             int i = ps.executeUpdate();
             return b;
         } catch (SQLException ex) {
@@ -44,18 +47,20 @@ public class BillsDAO {
         }
         return null;
     }
-    public java.util.List<BillsDTO> readAll(){
+
+    public java.util.List<BillsDTO> readAll() {
         java.util.List<BillsDTO> list = new ArrayList<>();
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQLREADALL);
             if (rs != null) {
                 while (rs.next()) {
-                   BillsDTO b = new BillsDTO();
+                    BillsDTO b = new BillsDTO();
                     b.setId(rs.getInt(1));
                     b.setInvoiceid(rs.getInt(2));
                     b.setCourseid(rs.getInt(3));
-                    b.setPrice(rs.getFloat(4));
+                    b.setCustomerid(rs.getInt(4));
+                    b.setPrice(rs.getFloat(5));
                     list.add(b);
                 }
                 return list;
@@ -65,25 +70,28 @@ public class BillsDAO {
         }
         return null;
     }
-    public BillsDTO update(BillsDTO b){
-         try {
+
+    public BillsDTO update(BillsDTO b) {
+        try {
             PreparedStatement ps = con.prepareStatement(SQLUPDATE);
             ps.setInt(1, b.getInvoiceid());
             ps.setInt(2, b.getCourseid());
-            ps.setFloat(3,b.getPrice());
-            ps.setInt(4, b.getId());
+            ps.setInt(3, b.getCustomerid());
+            ps.setFloat(4, b.getPrice());
+            ps.setInt(5, b.getId());
             int i = ps.executeUpdate();
-            if( i !=0 ){
+            if (i != 0) {
                 return b;
             }
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    public boolean delete(int id){
-         try {
+
+    public boolean delete(int id) {
+        try {
             PreparedStatement ps = con.prepareStatement(SQLDELETE);
             ps.setInt(1, id);
             int i = ps.executeUpdate();
@@ -93,5 +101,5 @@ public class BillsDAO {
         }
         return false;
     }
-    
+
 }

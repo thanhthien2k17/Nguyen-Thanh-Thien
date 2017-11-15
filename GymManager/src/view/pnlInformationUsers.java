@@ -5,40 +5,17 @@
  */
 package view;
 
-import bus.RoleAction;
-import bus.UsersAction;
-import dto.Roles;
-import dto.Users;
-import java.util.List;
-import java.util.Vector;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author Aptech
+ * @author thien
  */
-public class InformationUsersFrm extends javax.swing.JFrame {
-
-    UsersAction users;
-    RoleAction roles;
-    int id;
-    Users user11;
+public class pnlInformationUsers extends javax.swing.JPanel {
 
     /**
-     * Creates new form InformationUsersFrm
+     * Creates new form pnlInformationUsers
      */
-    public InformationUsersFrm() {
-    }
-
-    public InformationUsersFrm(Users u) {
+    public pnlInformationUsers() {
         initComponents();
-        user11 = u;
-        users = new UsersAction();
-        roles = new RoleAction();
-        loadTable(users.readAll());
-        loadCombobox();
     }
 
     /**
@@ -50,31 +27,87 @@ public class InformationUsersFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtAddress = new javax.swing.JTextField();
+        lblPassword = new javax.swing.JLabel();
+        txtPhone = new javax.swing.JTextField();
+        lblRole = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        lblIsActive = new javax.swing.JLabel();
+        txtFullName = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        cmbRole = new javax.swing.JComboBox<>();
+        btnCreate = new javax.swing.JButton();
+        cmbIsActive = new javax.swing.JComboBox<>();
+        btnUpdate = new javax.swing.JButton();
+        lblAddress = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
+        lblPhone = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
         spnUsers = new javax.swing.JScrollPane();
         tblUsers = new javax.swing.JTable();
-        lblUsername = new javax.swing.JLabel();
-        lblPassword = new javax.swing.JLabel();
-        lblRole = new javax.swing.JLabel();
-        lblIsActive = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
-        cmbRole = new javax.swing.JComboBox<>();
-        cmbIsActive = new javax.swing.JComboBox<>();
-        lblAddress = new javax.swing.JLabel();
-        lblPhone = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
-        lblFullName = new javax.swing.JLabel();
-        txtAddress = new javax.swing.JTextField();
-        txtPhone = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtFullName = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JPasswordField();
-        btnCreate = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        lblFullName = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        txtAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAddressActionPerformed(evt);
+            }
+        });
+
+        lblPassword.setText("Password:");
+
+        lblRole.setText("Role :");
+
+        lblIsActive.setText("Is Active :");
+
+        cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbRoleActionPerformed(evt);
+            }
+        });
+
+        btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
+
+        cmbIsActive.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbIsActive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbIsActiveActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        lblAddress.setText("Address :");
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        lblPhone.setText("Phone :");
+
+        jButton12.setText("Close");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         tblUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,69 +127,7 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         });
         spnUsers.setViewportView(tblUsers);
 
-        lblUsername.setText("Username :");
-
-        lblPassword.setText("Password:");
-
-        lblRole.setText("Role :");
-
-        lblIsActive.setText("Is Active :");
-
-        cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbRole.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbRoleActionPerformed(evt);
-            }
-        });
-
-        cmbIsActive.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbIsActive.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbIsActiveActionPerformed(evt);
-            }
-        });
-
-        lblAddress.setText("Address :");
-
-        lblPhone.setText("Phone :");
-
         lblEmail.setText("Email :");
-
-        lblFullName.setText("FullName :");
-
-        txtAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddressActionPerformed(evt);
-            }
-        });
-
-        btnCreate.setText("Create");
-        btnCreate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("Close");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -165,11 +136,15 @@ public class InformationUsersFrm extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        lblFullName.setText("FullName :");
+
+        lblUsername.setText("Username :");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spnUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE)
+            .addComponent(spnUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 1172, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(381, 381, 381)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +180,7 @@ public class InformationUsersFrm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
+                .addComponent(jButton12)
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -252,30 +227,21 @@ public class InformationUsersFrm extends javax.swing.JFrame {
                     .addComponent(btnCreate)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
+                    .addComponent(jButton12)
                     .addComponent(jButton1))
                 .addContainerGap())
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
-        int row = tblUsers.getSelectedRow();
-        id = Integer.parseInt(String.valueOf(tblUsers.getValueAt(row, 0)));
-        txtUsername.setText((String) tblUsers.getValueAt(row, 1));
-        txtPassword.setText("");
-        cmbRole.setSelectedItem(tblUsers.getValueAt(row, 3));
-        cmbIsActive.setSelectedItem(tblUsers.getValueAt(row, 4));
-        txtAddress.setText((String) tblUsers.getValueAt(row, 5));
-        txtPhone.setText((String) tblUsers.getValueAt(row, 6));
-        txtEmail.setText((String) tblUsers.getValueAt(row, 7));
-        txtFullName.setText((String) tblUsers.getValueAt(row, 8));
-
+    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tblUsersMouseClicked
+    }//GEN-LAST:event_txtAddressActionPerformed
+
+    private void cmbRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbRoleActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         String username = txtUsername.getText().trim();
@@ -314,15 +280,19 @@ public class InformationUsersFrm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Fill in form");
         }
 
-//        int active = 0;
-//        if (isActive.equalsIgnoreCase("yes")) {
-//            active = 1;
-//        } else {
-//            active = 0;
-//        }
-//        
+        //        int active = 0;
+        //        if (isActive.equalsIgnoreCase("yes")) {
+            //            active = 1;
+            //        } else {
+            //            active = 0;
+            //        }
+        //
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void cmbIsActiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbIsActiveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbIsActiveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int active = 0;
@@ -386,22 +356,25 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void cmbRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRoleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbRoleActionPerformed
-
-    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressActionPerformed
-
-    private void cmbIsActiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbIsActiveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbIsActiveActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
+        int row = tblUsers.getSelectedRow();
+        id = Integer.parseInt(String.valueOf(tblUsers.getValueAt(row, 0)));
+        txtUsername.setText((String) tblUsers.getValueAt(row, 1));
+        txtPassword.setText("");
+        cmbRole.setSelectedItem(tblUsers.getValueAt(row, 3));
+        cmbIsActive.setSelectedItem(tblUsers.getValueAt(row, 4));
+        txtAddress.setText((String) tblUsers.getValueAt(row, 5));
+        txtPhone.setText((String) tblUsers.getValueAt(row, 6));
+        txtEmail.setText((String) tblUsers.getValueAt(row, 7));
+        txtFullName.setText((String) tblUsers.getValueAt(row, 8));
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblUsersMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -409,60 +382,6 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         mf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    private void loadTable(List<Users> readAll) {
-        Vector cols = new Vector();
-        cols.add("ID");
-        cols.add("Username");
-        cols.add("Password");
-        cols.add("Role");
-        cols.add("Is Actived");
-        cols.add("Address");
-        cols.add("Phone");
-        cols.add("Email");
-        cols.add("FullName");
-
-        Vector rows = new Vector();
-        for (Users u : readAll) {
-            Vector row = new Vector();
-            row.add(u.getId());
-            row.add(u.getUsername());
-            row.add(u.getPassword());
-            row.add(roles.readById(u.getRoleId()).getName());
-            if (u.getIsActive() == 1) {
-                row.add("Yes");
-            } else {
-                row.add("No");
-            }
-            row.add(u.getAddress());
-            row.add(u.getPhone());
-            row.add(u.getEmail());
-            row.add(u.getFullName());
-            rows.add(row);
-        }
-
-        tblUsers.setModel(new DefaultTableModel(rows, cols));
-        tblUsers.updateUI();
-        spnUsers.setViewportView(this.tblUsers);
-    }
-
-    private void loadCombobox() {
-        Vector roleitems = new Vector();
-        for (Roles r : roles.readAll()) {
-            roleitems.add(r.getName());
-        }
-        cmbRole.setModel(new DefaultComboBoxModel<>(roleitems));
-        cmbRole.updateUI();
-
-        Vector activeitems = new Vector();
-        activeitems.add("Yes");
-        activeitems.add("No");
-        cmbIsActive.setModel(new DefaultComboBoxModel<>(activeitems));
-        cmbIsActive.updateUI();
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -472,7 +391,13 @@ public class InformationUsersFrm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbIsActive;
     private javax.swing.JComboBox<String> cmbRole;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFullName;
