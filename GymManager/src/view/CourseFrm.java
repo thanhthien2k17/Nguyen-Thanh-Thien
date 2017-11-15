@@ -7,14 +7,8 @@ package view;
 
 import bus.CourseAction;
 import dto.CourseDTO;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -80,7 +74,6 @@ public class CourseFrm extends javax.swing.JFrame {
         lblPrice = new javax.swing.JLabel();
         lblDescription = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        dcdTime = new datechooser.beans.DateChooserCombo();
         txtPrice = new javax.swing.JTextField();
         txtDescription = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
@@ -88,6 +81,8 @@ public class CourseFrm extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         lblId = new javax.swing.JLabel();
         lblId2 = new javax.swing.JLabel();
+        txtTime = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +100,9 @@ public class CourseFrm extends javax.swing.JFrame {
         tblCourse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblCourseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblCourseMouseEntered(evt);
             }
         });
         spnCourse.setViewportView(tblCourse);
@@ -140,6 +138,8 @@ public class CourseFrm extends javax.swing.JFrame {
 
         lblId.setText("Id:");
 
+        jLabel1.setText("day");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,10 +160,13 @@ public class CourseFrm extends javax.swing.JFrame {
                                     .addComponent(lblId))
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dcdTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblId2)))
+                                    .addComponent(lblId2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblDescription)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -191,10 +194,11 @@ public class CourseFrm extends javax.swing.JFrame {
                     .addComponent(lblName)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTime)
-                    .addComponent(dcdTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPrice)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -207,7 +211,7 @@ public class CourseFrm extends javax.swing.JFrame {
                     .addComponent(btnCreate)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addGap(0, 78, Short.MAX_VALUE))
+                .addGap(0, 75, Short.MAX_VALUE))
         );
 
         pack();
@@ -236,10 +240,7 @@ public class CourseFrm extends javax.swing.JFrame {
 //        txtID.setText(String.valueOf(id));
         lblId2.setText(String.valueOf(tblCourse.getValueAt(row, 0)));
         txtName.setText((String) tblCourse.getValueAt(row, 1));
-        Date date = (Date) tblCourse.getValueAt(row, 2);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        dcdTime.setSelectedDate(calendar);
+        txtTime.setText(String.valueOf(tblCourse.getValueAt(row, 2)));
         txtPrice.setText(String.valueOf(tblCourse.getValueAt(row, 3)));
         txtDescription.setText((String) tblCourse.getValueAt(row, 4));
 
@@ -251,47 +252,40 @@ public class CourseFrm extends javax.swing.JFrame {
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
 
         // TODO add your handling code here:
-        try {
-            String name = txtName.getText().trim();
-            SimpleDateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
-            Date time = dmy.parse(dcdTime.getText().trim());
-            float price = Float.parseFloat(txtPrice.getText().trim());
-            String description = txtDescription.getText().trim();
-            CourseDTO c = new CourseDTO(name, time, price, description);
-            if (ac.create(c) != null) {
-                JOptionPane.showMessageDialog(this, " Create Success ! ");
-                loadTable(ac.readAll());
-            } else {
-                JOptionPane.showMessageDialog(this, " Failed ! Again !! ");
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(CourseFrm.class.getName()).log(Level.SEVERE, null, ex);
+        String name = txtName.getText().trim();
+        int time = Integer.parseInt(txtTime.getText().trim());
+        float price = Float.parseFloat(txtPrice.getText().trim());
+        String description = txtDescription.getText().trim();
+        CourseDTO c = new CourseDTO(name, time, price, description);
+        if (ac.create(c) != null) {
+            JOptionPane.showMessageDialog(this, " Create Success ! ");
+            loadTable(ac.readAll());
+        } else {
+            JOptionPane.showMessageDialog(this, " Failed ! Again !! ");
         }
 
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        try {
-            int id= Integer.parseInt(lblId2.getText().trim());
-            String name = txtName.getText().trim();
-            SimpleDateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
-            Date time = dmy.parse(dcdTime.getText().trim());
-            float price = Float.parseFloat(txtPrice.getText().trim());
-            String description = txtDescription.getText().trim();
-            CourseDTO c = new CourseDTO(id,name, time, price, description);
-
-            if (ac.update(c) != null) {
-                JOptionPane.showMessageDialog(this, " Update Success ! ");
-                loadTable(ac.readAll());
-            } else {
-                JOptionPane.showMessageDialog(this, " Failed ! Again !! ");
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(CourseFrm.class.getName()).log(Level.SEVERE, null, ex);
+        int id = Integer.parseInt(lblId2.getText().trim());
+        String name = txtName.getText().trim();
+        int time = Integer.parseInt(txtTime.getText().trim());
+        float price = Float.parseFloat(txtPrice.getText().trim());
+        String description = txtDescription.getText().trim();
+        CourseDTO c = new CourseDTO(id,name, time, price, description);
+        if (ac.update(c) != null) {
+            JOptionPane.showMessageDialog(this, " Update Success ! ");
+            loadTable(ac.readAll());
+        } else {
+            JOptionPane.showMessageDialog(this, " Failed ! Again !! ");
         }
 
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void tblCourseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCourseMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblCourseMouseEntered
 
     /**
      * @param args the command line arguments
@@ -332,7 +326,7 @@ public class CourseFrm extends javax.swing.JFrame {
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
-    private datechooser.beans.DateChooserCombo dcdTime;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblId2;
@@ -344,6 +338,7 @@ public class CourseFrm extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtTime;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -43,8 +43,7 @@ public class CourseDAO {
         try {
             PreparedStatement ps = con.prepareStatement(SQLCREATE);
             ps.setString(1, c.getName());
-            ps.setDate(2, new java.sql.Date(mdy.parse(mdy.format(c.getTime())).getDate()));
-//            ps.setDate(3, new java.sql.Date(c.getDate().getTime());
+            ps.setInt(2, c.getTime());
             ps.setFloat(3, c.getPrice());
             ps.setString(4, c.getDescription());
             int i = ps.executeUpdate();
@@ -53,8 +52,6 @@ public class CourseDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -69,7 +66,7 @@ public class CourseDAO {
                     CourseDTO c = new CourseDTO();
                     int id = rs.getInt(1);
                     String name = rs.getString(2);
-                    Date time = dmy.parse(dmy.format(rs.getDate(3)));
+                    int time = rs.getInt(3);
                     float price = rs.getFloat(4);
                     String description = rs.getString(5);
                     list.add(new CourseDTO(id, name, time, price, description));
@@ -77,8 +74,6 @@ public class CourseDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -88,7 +83,7 @@ public class CourseDAO {
         try {
             PreparedStatement ps = con.prepareStatement(SQLUPDATE);
             ps.setString(1, c.getName());
-            ps.setDate(2, new java.sql.Date(mdy.parse(mdy.format(c.getTime())).getDate()));
+            ps.setInt(2, c.getTime());
             ps.setFloat(3, c.getPrice());
             ps.setString(4, c.getDescription());
             ps.setInt(5, c.getId());
@@ -96,7 +91,7 @@ public class CourseDAO {
             if (i != 0) {
                 return c;
             }
-        } catch (SQLException | ParseException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -122,7 +117,7 @@ public class CourseDAO {
             if(rs != null){
                 if(rs.next()){
                     String name = rs.getString(2);
-                    Date time = dmy.parse(dmy.format(rs.getDate(3)));
+                    int time =rs.getInt(3);
                     double price = rs.getDouble(4);
                     String description = rs.getString(5);
                     return (new CourseDTO(id, name, time, (float) price, description));
@@ -130,8 +125,6 @@ public class CourseDAO {
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
             Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;

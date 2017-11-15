@@ -13,11 +13,11 @@ import java.util.List;
  *
  * @author phong
  */
-public class RolesAction {
+public class RoleAction {
 
     RolesDAO dao;
 
-    public RolesAction() {
+    public RoleAction() {
         dao = new RolesDAO();
     }
 
@@ -29,16 +29,12 @@ public class RolesAction {
         return dao.readAll();
     }
 
-    public Roles readById(int id) {
-        return dao.readById(id);
-    }
-
-    public List<Roles> readByName(String name) {
+    public Roles readByName(String name) {
         return dao.readByName(name);
     }
 
-    public Roles readByNameRole(String name) {
-        return dao.readByNameRole(name);
+    public Roles readById(int id) {
+        return dao.readById(id);
     }
 
     public Roles update(Roles r) {

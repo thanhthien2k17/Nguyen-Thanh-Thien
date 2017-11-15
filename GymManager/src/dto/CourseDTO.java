@@ -15,13 +15,13 @@ import java.util.Date;
 public class CourseDTO implements Serializable,Comparable<CourseDTO>{
     private int id;
     private String name;
-    private Date time;
+    private int time;
     private float price;
     private String description;
     public CourseDTO() {
     }
 
-    public CourseDTO(String name, Date time, float price, String description) {
+    public CourseDTO(String name, int time, float price, String description) {
         this.name = name;
         this.time = time;
         this.price = price;
@@ -29,7 +29,7 @@ public class CourseDTO implements Serializable,Comparable<CourseDTO>{
     }
 
     
-    public CourseDTO(int id, String name, Date time, float price, String description) {
+    public CourseDTO(int id, String name, int time, float price, String description) {
         this.id = id;
         this.name = name;
         this.time = time;
@@ -53,11 +53,11 @@ public class CourseDTO implements Serializable,Comparable<CourseDTO>{
         this.name = name;
     }
 
-    public Date getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(int time) {
         this.time = time;
     }
 

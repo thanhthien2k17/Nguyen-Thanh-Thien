@@ -13,11 +13,11 @@ import java.util.List;
  *
  * @author phong
  */
-public class FunctionsAction {
+public class FunctionAction {
 
     FunctionsDAO dao;
 
-    public FunctionsAction() {
+    public FunctionAction() {
         dao = new FunctionsDAO();
     }
 
@@ -31,10 +31,6 @@ public class FunctionsAction {
 
     public Functions readById(int id) {
         return dao.readById(id);
-    }
-
-    public List<Functions> readByName(String name) {
-        return dao.readByName(name);
     }
 
     public Functions readByNameFunction(String name) {

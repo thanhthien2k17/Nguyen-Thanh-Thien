@@ -13,11 +13,11 @@ import java.util.List;
  *
  * @author phong
  */
-public class FunctionRolesAction {
+public class FunctionRoleAction {
 
     FunctionRolesDAO dao;
 
-    public FunctionRolesAction() {
+    public FunctionRoleAction() {
         dao = new FunctionRolesDAO();
     }
 
@@ -29,12 +29,15 @@ public class FunctionRolesAction {
         return dao.readAll();
     }
 
-    public FunctionRoles readById(int id) {
-        return dao.readById(id);
+    public FunctionRoles readByRole(int id) {
+        return dao.readByRole(id);
     }
 
-    public boolean delete(int id) {
-        return dao.delete(id);
+    public List<FunctionRoles> readByFunction(int id) {
+        return dao.readByFunction(id);
     }
 
+    public boolean delete(int role, int function) {
+        return dao.delete(role, function);
+    }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import db.DBConnector;
@@ -13,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,76 +20,108 @@ import java.util.logging.Logger;
  */
 public class FunctionRolesDAO {
 
-    Connection con=null;
+    Connection con;
     final String SQLCREATE = "INSERT INTO FUNCTIONROLES VALUES(?,?)";
     final String SQLREADALL = "SELECT * FROM FUNCTIONROLES";
-    final String SQLREADBYID = "SELECT * FROM FUNCTIONROLES WHERE ROLEID=?";
+    final String SQLREADBYROLE = "SELECT * FROM FUNCTIONROLES WHERE ROLEID=?";
     final String SQLREADBYFUNCTION = "SELECT * FROM FUNCTIONROLES WHERE FUNCTIONID=?";
-    final String SQLDELETE = "DELETE FROM FUNCTIONROLES WHERE ROLEID=? AND FUNCTIONID=?";
-    
+    final String SQLDELTE = "DELETE FROM FUNCTIONROLES WHERE ROLEID=? AND FUNCTIONID=?";
+
     public FunctionRolesDAO() {
         con = new DBConnector().getCon();
     }
 
-    public FunctionRoles create(FunctionRoles f){
-
+    public FunctionRoles create(FunctionRoles f) {
         try {
             PreparedStatement pr = con.prepareStatement(SQLCREATE);
-            pr.setInt(1, f.getRoleId());
-            pr.setInt(2, f.getFunctionId());
-            if (pr.executeUpdate() != 0) {
-                return f;
+            for (Integer i : f.getFunctions()) {
+                pr.setInt(1, f.getRole());
+                pr.setInt(2, i);
+                pr.executeUpdate();
+            }
+            return f;
+        } catch (SQLException ex) {
+            Logger.getLogger(FunctionRolesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public List<FunctionRoles> readAll() {
+        List<FunctionRoles> l = new ArrayList<>();
+        Map<Integer, List<Integer>> functions = new HashMap<>();
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(SQLREADALL);
+            if (rs != null) {
+                while (rs.next()) {
+                    int role = rs.getInt(2);
+                    if (functions.containsKey(role)) {
+                        functions.get(role).add(rs.getInt(3));
+                    } else {
+                        List<Integer> li = new ArrayList<>();
+                        functions.put(role, li);
+                        functions.get(role).add(rs.getInt(3));
+                    }
+                }
+            }
+            for (Map.Entry<Integer, List<Integer>> f : functions.entrySet()) {
+                l.add(new FunctionRoles(f.getKey(), f.getValue()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FunctionRolesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
+    }
+
+    public FunctionRoles readByRole(int id) {
+        List<Integer> l = new ArrayList<>();
+        try {
+            PreparedStatement pr = con.prepareStatement(SQLREADBYROLE);
+            pr.setInt(1, id);
+            ResultSet rs = pr.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    l.add(rs.getInt(3));
+                }
+                return new FunctionRoles(id, l);
             }
         } catch (SQLException ex) {
             Logger.getLogger(FunctionRolesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    public List<FunctionRoles> readAll() {
+
+    public List<FunctionRoles> readByFunction(int id) {
         List<FunctionRoles> l = new ArrayList<>();
         try {
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(SQLREADALL);
-            if (rs != null) {
-                while (rs.next()) {
-                    int id = rs.getInt(1);
-                    int roleId = rs.getInt(2);
-                    int functionId = rs.getInt(3);
-                    l.add(new FunctionRoles(id, roleId, functionId));
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FunctionsDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return l;
-    }
-    public FunctionRoles readById(int id) {
-        try {
-            PreparedStatement pr = con.prepareStatement(SQLREADBYID);
+            PreparedStatement pr = con.prepareStatement(SQLREADBYFUNCTION);
             pr.setInt(1, id);
             ResultSet rs = pr.executeQuery();
             if (rs != null) {
-                if (rs.next()) {
-                    int roleId = rs.getInt(2);
-                    int funtionId = rs.getInt(3);
-                    return new FunctionRoles(id, roleId, funtionId);
+                while (rs.next()) {
+                    int role = rs.getInt(2);
+                    List<Integer> li = new ArrayList<>();
+                    li.add(id);
+                    l.add(new FunctionRoles(role, li));
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FunctionsDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FunctionRolesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return l;
     }
 
-    public boolean delete(int id) {
+    public boolean delete(int role, int function) {
         try {
-            PreparedStatement pr = con.prepareStatement(SQLDELETE);
-            pr.setInt(1, id);
-            if (pr.executeUpdate() != 0) {
+            PreparedStatement pr = con.prepareStatement(SQLDELTE);
+            pr.setInt(1, role);
+            pr.setInt(2, function);
+            int i = pr.executeUpdate();
+            if (i != 0) {
                 return true;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FunctionsDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FunctionRolesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return false;

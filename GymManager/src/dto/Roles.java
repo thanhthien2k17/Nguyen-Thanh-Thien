@@ -13,22 +13,22 @@ import java.util.Objects;
  * @author phong
  */
 public class Roles implements Serializable, Comparable<Roles>{
-   private int id;
-   private String name;
-   private String description;
+    private int id;
+    private String name;
+    private String des;
 
     public Roles() {
     }
 
-    public Roles(String name, String description) {
+    public Roles(String name, String des) {
         this.name = name;
-        this.description = description;
+        this.des = des;
     }
 
-    public Roles(int id, String name, String description) {
+    public Roles(int id, String name, String des) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.des = des;
     }
 
     public int getId() {
@@ -47,17 +47,12 @@ public class Roles implements Serializable, Comparable<Roles>{
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDes() {
+        return des;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
+    public void setDes(String des) {
+        this.des = des;
     }
 
     @Override
@@ -87,11 +82,15 @@ public class Roles implements Serializable, Comparable<Roles>{
         return true;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Roles{" + "id=" + id + ", name=" + name + ", des=" + des + '}';
+    }
+
     @Override
     public int compareTo(Roles o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-   
-   
+    
+    
 }

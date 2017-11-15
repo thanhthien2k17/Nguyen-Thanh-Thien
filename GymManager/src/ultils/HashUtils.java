@@ -25,7 +25,6 @@ public class HashUtils {
         byte[] hash;
         String strTemp = "";
         try {
-            //MD5 co keysize la: 16
             MessageDigest md = MessageDigest.getInstance("MD5");
             hash = md.digest(pass.getBytes("UTF8"));
             strTemp = Base64.getEncoder().encodeToString(hash);

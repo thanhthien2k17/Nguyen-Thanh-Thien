@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import db.DBConnector;
@@ -27,7 +22,6 @@ public class FunctionsDAO {
     final String SQLCREATE = "INSERT INTO FUNCTIONS VALUES(?,?)";
     final String SQLREADALL = "SELECT * FROM FUNCTIONS";
     final String SQLREADBYID = "SELECT * FROM FUNCTIONS WHERE ID=?";
-    final String SQLREADBYNAME = "SELECT * FROM FUNCTIONS WHERE NAME LIKE '%?%'";
     final String SQLREADBYNAMEFUNCTION = "SELECT * FROM FUNCTIONS WHERE NAME=?";
     final String SQLUPDATE = "UPDATE FUNCTIONS SET NAME=?, DESCRIPTION=? WHERE ID=?";
     final String SQLDELETE = "DELETE FROM FUNCTIONS WHERE ID=?";
@@ -40,7 +34,7 @@ public class FunctionsDAO {
         try {
             PreparedStatement pr = con.prepareStatement(SQLCREATE);
             pr.setString(1, f.getName());
-            pr.setString(2, f.getDescription());
+            pr.setString(2, f.getDes());
             if (pr.executeUpdate() != 0) {
                 return f;
             }
@@ -87,26 +81,6 @@ public class FunctionsDAO {
         return null;
     }
 
-    public List<Functions> readByName(String name) {
-        List<Functions> l = new ArrayList<>();
-        try {
-            PreparedStatement pr = con.prepareStatement(SQLREADBYNAME);
-            pr.setString(1, name);
-            ResultSet rs = pr.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
-                    int id = rs.getInt(1);
-                    String nam = rs.getString(2);
-                    String des = rs.getString(3);
-                    l.add(new Functions(id, nam, des));
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(FunctionsDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return l;
-    }
-
     public Functions readByNameFunction(String name) {
         try {
             PreparedStatement pr = con.prepareStatement(SQLREADBYNAMEFUNCTION);
@@ -129,7 +103,7 @@ public class FunctionsDAO {
         try {
             PreparedStatement pr = con.prepareStatement(SQLUPDATE);
             pr.setString(1, f.getName());
-            pr.setString(2, f.getDescription());
+            pr.setString(2, f.getDes());
             pr.setInt(3, f.getId());
             if (pr.executeUpdate() != 0) {
                 return f;

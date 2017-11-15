@@ -158,7 +158,7 @@ public class Users implements Serializable, Comparable<Users>{
 
     @Override
     public int compareTo(Users o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return o.getPassword().compareTo(this.password);
     }
     
     

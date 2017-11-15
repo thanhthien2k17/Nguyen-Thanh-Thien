@@ -21,22 +21,56 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
+//String sql = "YOUR INSERT STATEMENT HERE";
+// 
+//PreparedStatement ps = conn.prepareStatement(sql,
+//        Statement.RETURN_GENERATED_KEYS);
+// 
+//ps.execute();
+// 
+//ResultSet rs = ps.getGeneratedKeys();
+//int generatedKey = 0;
+//if (rs.next()) {
+//    generatedKey = rs.getInt(1);
+//}
+// 
+//System.out.println("Inserted record's ID: " + generatedKey);
 public class InvoiceidDAO {
+
     Connection con = null;
     final private String SQLCREATE = "INSERT INTO INVOICEID VALUES (?,?,?)";
-    final private String SQLREADALL= "SELECT * FROM INVOICEID ";
+    final private String SQLREADALL = "SELECT * FROM INVOICEID ";
     final private String SQLUPDATE = "UPDATE INVOICEID SET USERID = ?, DATE = ?, TOTAL = ? WHERE ID = ?";
     final private String SQLDELETE = "DELETE FROM INVOICEID WHERE ID = ? ";
+    final private String SQLKEY = "YOUR INSERT INVOICEID HERE";
+
+    public int key() {
+        int generatedKey = 0;
+        try {
+            PreparedStatement ps = con.prepareStatement(SQLKEY,
+                    Statement.RETURN_GENERATED_KEYS);
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                generatedKey = rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InvoiceidDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return generatedKey;
+    }
 
     public InvoiceidDAO() {
         con = new DBConnector().getCon();
     }
-    public InvoiceidDTO create(InvoiceidDTO in){
+
+    public InvoiceidDTO create(InvoiceidDTO in) {
         try {
             PreparedStatement ps = con.prepareStatement(SQLCREATE);
             ps.setInt(1, in.getUserid());
             ps.setString(2, in.getDatetime());
-            ps.setInt(3, in.getTotal());
+            ps.setFloat(3, in.getTotal());
             int i = ps.executeUpdate();
             return in;
         } catch (SQLException ex) {
@@ -44,7 +78,8 @@ public class InvoiceidDAO {
         }
         return null;
     }
-    public List<InvoiceidDTO> readAll(){
+
+    public List<InvoiceidDTO> readAll() {
         List<InvoiceidDTO> list = new ArrayList<>();
         try {
             Statement st = con.createStatement();
@@ -65,24 +100,26 @@ public class InvoiceidDAO {
         }
         return null;
     }
-    public InvoiceidDTO update (InvoiceidDTO in){
-         try {
+
+    public InvoiceidDTO update(InvoiceidDTO in) {
+        try {
             PreparedStatement ps = con.prepareStatement(SQLUPDATE);
             ps.setInt(1, in.getUserid());
             ps.setString(2, in.getDatetime());
-            ps.setInt(3, in.getTotal());
+            ps.setFloat(3, in.getTotal());
             ps.setInt(4, in.getId());
             int i = ps.executeUpdate();
-            if( i !=0 ){
+            if (i != 0) {
                 return in;
             }
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    public boolean delete(int id){
+
+    public boolean delete(int id) {
         try {
             PreparedStatement ps = con.prepareStatement(SQLDELETE);
             ps.setInt(1, id);

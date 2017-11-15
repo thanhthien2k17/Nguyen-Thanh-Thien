@@ -5,7 +5,7 @@
  */
 package view;
 
-import bus.RolesAction;
+import bus.RoleAction;
 import bus.UsersAction;
 import dto.Roles;
 import dto.Users;
@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class InformationUsersFrm extends javax.swing.JFrame {
     UsersAction users;
-    RolesAction roles;
+    RoleAction roles;
     int id;
     
     /**
@@ -30,7 +30,7 @@ public class InformationUsersFrm extends javax.swing.JFrame {
     public InformationUsersFrm() {
         initComponents();
         users = new UsersAction();
-        roles = new RolesAction();
+        roles = new RoleAction();
         loadTable(users.readAll());
         loadCombobox();
     }
@@ -248,7 +248,7 @@ public class InformationUsersFrm extends javax.swing.JFrame {
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         String username = txtUsername.getText().trim();
         String password = txtPassword.getText().trim();
-        int roleid = roles.readByNameRole((String) cmbRole.getSelectedItem()).getId();
+        int roleid = roles.readByName((String) cmbRole.getSelectedItem()).getId();
         String isActive = (String) cmbIsActive.getSelectedItem();
         String address = txtAddress.getText().trim();       
         String phone = txtPhone.getText().trim();
@@ -302,7 +302,7 @@ public class InformationUsersFrm extends javax.swing.JFrame {
         int active = 0;
         String username = txtUsername.getText().trim();
         String password = txtPassword.getText().trim();
-        int roleid = roles.readByNameRole((String) cmbRole.getSelectedItem()).getId();
+        int roleid = roles.readByName((String) cmbRole.getSelectedItem()).getId();
         String isActive = (String) cmbIsActive.getSelectedItem();
         String address = txtAddress.getText().trim();       
         String phone = txtPhone.getText().trim();

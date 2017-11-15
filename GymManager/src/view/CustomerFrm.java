@@ -30,7 +30,7 @@ public class CustomerFrm extends javax.swing.JFrame {
         loadTable(ac.readAll());
     }
 
-        void loadTable(List<CustomerDTO> readAll) {
+    void loadTable(List<CustomerDTO> readAll) {
         Vector cols = new Vector();
         cols.add("ID");
         cols.add("Name");

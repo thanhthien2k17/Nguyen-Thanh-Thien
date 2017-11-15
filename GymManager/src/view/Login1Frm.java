@@ -5,8 +5,9 @@
  */
 package view;
 
-import bus.FunctionRolesAction;
-import bus.RolesAction;
+import bus.FunctionRoleAction;
+import bus.RoleAction;
+import bus.UsersAction;
 import dao.UsersDAO;
 import dto.Roles;
 import ultils.HashUtils;
@@ -19,19 +20,18 @@ import javax.swing.JOptionPane;
  *
  * @author phong
  */
-public class LoginFrm extends javax.swing.JFrame {
+public class Login1Frm extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginFrm
      */
-    UsersDAO users;
-    RolesAction fr;
+    UsersAction users;
 
-    public LoginFrm() {
+
+    public Login1Frm() {
         initComponents();
         setLocationRelativeTo(null);
-        users = new UsersDAO();
-        fr = new RolesAction();
+        users = new UsersAction();
     }
 
     /**
@@ -84,8 +84,10 @@ public class LoginFrm extends javax.swing.JFrame {
                         .addComponent(lblPassword)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLogin)
-                            .addComponent(txtPassword))))
+                            .addComponent(txtPassword)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnLogin)))))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,13 +120,13 @@ public class LoginFrm extends javax.swing.JFrame {
         String pass = txtPassword.getText();
         user = users.readByName(username);
         if (user != null) {
-            if (user.getPassword().equals(new HashUtils().hashmd5(pass))) {
+            if (user.getPassword().startsWith(new HashUtils().hashmd5(pass))) {
                 if (user.getIsActive() == 1) {
                     if (user.getRoleId()==1) {
-//                        MainFrm mf = new MainFrm(user);
-//                        mf.setVisible(true);
-//                        this.dispose();
-//                        JOptionPane.showMessageDialog(this, "Access");
+                        MainFrm mf = new MainFrm(user);
+                        mf.setVisible(true);
+                        this.dispose();
+                        JOptionPane.showMessageDialog(this, "Access");
                     } else {
                         JOptionPane.showMessageDialog(this, "You don't have login right");
                     }
@@ -156,20 +158,20 @@ public class LoginFrm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login1Frm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login1Frm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login1Frm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login1Frm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginFrm().setVisible(true);
+                new Login1Frm().setVisible(true);
             }
         });
     }

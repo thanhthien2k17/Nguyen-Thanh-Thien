@@ -15,7 +15,7 @@ public class InvoiceidDTO implements Serializable, Comparable<InvoiceidDTO>{
     private int id;
     private int userid;
     private String datetime;
-    private int total;
+    private float total;
 
     public InvoiceidDTO() {
     }
@@ -27,7 +27,7 @@ public class InvoiceidDTO implements Serializable, Comparable<InvoiceidDTO>{
         this.total = total;
     }
 
-    public InvoiceidDTO(int userid, String datetime, int total) {
+    public InvoiceidDTO(int userid, String datetime, float total) {
         this.userid = userid;
         this.datetime = datetime;
         this.total = total;
@@ -57,7 +57,7 @@ public class InvoiceidDTO implements Serializable, Comparable<InvoiceidDTO>{
         this.datetime = datetime;
     }
 
-    public int getTotal() {
+    public float getTotal() {
         return total;
     }
 

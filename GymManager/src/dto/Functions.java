@@ -15,20 +15,20 @@ import java.util.Objects;
 public class Functions implements Serializable, Comparable<Functions>{
     private int id;
     private String name;
-    private String description;
+    private String des;
 
     public Functions() {
     }
 
-    public Functions(String name, String description) {
+    public Functions(String name, String des) {
         this.name = name;
-        this.description = description;
+        this.des = des;
     }
-    
-    public Functions(int id, String name, String description) {
+
+    public Functions(int id, String name, String des) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.des = des;
     }
 
     public int getId() {
@@ -47,17 +47,12 @@ public class Functions implements Serializable, Comparable<Functions>{
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDes() {
+        return des;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public int compareTo(Functions o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setDes(String des) {
+        this.des = des;
     }
 
     @Override
@@ -85,6 +80,16 @@ public class Functions implements Serializable, Comparable<Functions>{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Functions{" + "id=" + id + ", name=" + name + ", des=" + des + '}';
+    }
+    
+    @Override
+    public int compareTo(Functions o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
